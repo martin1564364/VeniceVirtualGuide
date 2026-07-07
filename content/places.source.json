@@ -1,0 +1,725 @@
+{
+  "version": "2026-07-07-6",
+  "places": [
+    {
+      "id": "st-marks-square",
+      "order": 1,
+      "coords": {
+        "lat": 45.4341,
+        "lng": 12.3388
+      },
+      "image": "images/st-marks-square.webp",
+      "imageThumb": "images/thumbs/st-marks-square.webp",
+      "pl": {
+        "name": "Plac Świętego Marka",
+        "tagline": "Salon Europy",
+        "text": "Stoicie na jedynym placu w Wenecji, który nosi nazwę piazza. Każdy inny plac w mieście to campo. Przez ponad tysiąc lat to miejsce było wielką sceną republiki: tu przechodziły procesje, tu władza pokazywała swój przepych, a pod arkadami spotykali się kupcy, pielgrzymi i ciekawscy przybysze.\n\nRozejrzyjcie się powoli. Z jednej strony błyszczy Bazylika Świętego Marka, z drugiej stoją długie skrzydła dawnych prokuracji, czyli urzędów najważniejszych ludzi republiki. Napoleon miał nazwać ten plac salonem Europy i łatwo zrozumieć dlaczego: wszystko jest tu ustawione jak dekoracja teatralna.\n\nPlac ma też praktyczną tajemnicę. Leży bardzo nisko, dlatego podczas acqua alta woda potrafi wypłynąć przez odpływy i zamienić kamienną posadzkę w płytkie lustro. Najlepiej przejść się wzdłuż arkad, posłuchać kawiarnianych orkiestr i wyobrazić sobie, że przez chwilę stoicie w sercu dawnej morskiej potęgi.",
+        "audio": "audio/pl/st-marks-square.mp3",
+        "audioDuration": 66
+      },
+      "en": {
+        "name": "St Mark's Square",
+        "tagline": "The Drawing Room of Europe",
+        "text": "You are standing in the only true piazza in Venice. Every other square in the city is called a campo. For more than a thousand years this open space was the grand stage of the republic: processions crossed it, rulers displayed their power here, and merchants, pilgrims, musicians, and visitors met beneath the arcades.\n\nLook around slowly. On one side, St Mark's Basilica glitters with domes and mosaics. Around the square stretch the long Procuratie, once offices and residences for some of Venice's most important officials. Napoleon is said to have called this place the drawing room of Europe, and the phrase still fits: the whole square feels arranged like a theatre set.\n\nThere is also a practical secret under your feet. The piazza lies very low, so during acqua alta, high water can rise through the drains and turn the paving stones into a shallow mirror. Walk along the arcades, listen for the cafe orchestras, and imagine standing at the centre of a republic that once ruled the sea.",
+        "audio": "audio/en/st-marks-square.mp3",
+        "audioDuration": 70
+      }
+    },
+    {
+      "id": "st-marks-basilica",
+      "order": 2,
+      "coords": {
+        "lat": 45.4346,
+        "lng": 12.3397
+      },
+      "image": "images/st-marks-basilica.webp",
+      "imageThumb": "images/thumbs/st-marks-basilica.webp",
+      "pl": {
+        "name": "Bazylika Świętego Marka",
+        "tagline": "Złoto, mozaiki i morska republika",
+        "text": "Bazylika Świętego Marka nie wygląda jak zwykły kościół zachodniej Europy. Jej kopuły, marmury i złote mozaiki przypominają raczej Konstantynopol, bo Wenecja przez stulecia patrzyła na wschód. Kupcy wracali z Bizancjum z towarami, pomysłami i artystami, a republika zamieniła te wpływy w swój najbardziej rozpoznawalny symbol.\n\nLegenda mówi, że relikwie Świętego Marka przywieziono do Wenecji z Aleksandrii w IX wieku, ukryte pod wieprzowiną, aby ominąć kontrolę. Dla miasta był to skarb polityczny i duchowy: własny patron, własna opowieść, własne miejsce w historii chrześcijaństwa.\n\nPrzed fasadą warto zwrócić uwagę na konie nad wejściem. Oryginalne rzeźby trafiły do Wenecji po zdobyciu Konstantynopola w 1204 roku. Dzisiejsze konie na zewnątrz to kopie, ale ich historia nadal przypomina, że Wenecja była piękna, pobożna i bardzo skuteczna w zbieraniu trofeów.",
+        "audio": "audio/pl/st-marks-basilica.mp3",
+        "audioDuration": 65
+      },
+      "en": {
+        "name": "St Mark's Basilica",
+        "tagline": "Gold, Mosaics, and a Maritime Republic",
+        "text": "St Mark's Basilica does not look like a typical western European church. Its domes, marbles, and golden mosaics point east, toward Byzantium and Constantinople. For centuries Venice traded across the eastern Mediterranean, bringing back goods, ideas, artists, and architectural forms. The basilica turns all of that into one dazzling symbol.\n\nAccording to tradition, the relics of St Mark were brought from Alexandria in the ninth century, hidden under pork to avoid inspection. For Venice, this was more than a religious treasure. It gave the city its own patron, its own sacred story, and a powerful place in Christian history.\n\nBefore you enter, look at the horses above the main doorway. The originals came to Venice after the sack of Constantinople in 1204. The horses outside are copies today, but the story remains clear: Venice was beautiful, devout, and extremely good at collecting trophies from the wider world.",
+        "audio": "audio/en/st-marks-basilica.mp3",
+        "audioDuration": 64
+      }
+    },
+    {
+      "id": "doges-palace",
+      "order": 3,
+      "coords": {
+        "lat": 45.4337,
+        "lng": 12.3404
+      },
+      "image": "images/doges-palace.webp",
+      "imageThumb": "images/thumbs/doges-palace.webp",
+      "pl": {
+        "name": "Pałac Dożów",
+        "tagline": "Serce władzy Republiki",
+        "text": "Pałac Dożów był jednocześnie rezydencją, urzędem, salą sądową i symbolem państwa. To tutaj mieszkał doża, wybierany władca Wenecji, ale nie był on królem. Republika bardzo pilnowała, aby żadna osoba nie stała się zbyt silna. Władza była rozdzielona pomiędzy rady, urzędników i skomplikowane procedury.\n\nZ zewnątrz pałac wygląda niemal lekko: gotyckie arkady podtrzymują wielką bryłę z jasnego kamienia i różowego marmuru. W środku skala zmienia się całkowicie. Sale są ogromne, pełne obrazów, złoceń i scen pokazujących Wenecję jako miasto wybrane przez historię.\n\nNajmocniejszy kontrast czeka po drugiej stronie. Z reprezentacyjnych sal przechodzi się do więzień, wąskich korytarzy i cel. Pałac przypomina, że Wenecja potrafiła zachwycać sztuką, ale rządziła twardo i bardzo dokładnie.",
+        "audio": "audio/pl/doges-palace.mp3",
+        "audioDuration": 59
+      },
+      "en": {
+        "name": "Doge's Palace",
+        "tagline": "The Republic's Seat of Power",
+        "text": "The Doge's Palace was a residence, government office, courtroom, and state symbol all at once. The doge lived here, but he was not a king. Venice worked hard to prevent any single person from becoming too powerful. Authority was shared through councils, officials, elections, and carefully designed rules.\n\nFrom the outside, the palace seems almost weightless. Gothic arcades support a broad mass of pale stone and pink marble, as if the building were floating beside the lagoon. Inside, the scale changes completely. The rooms are vast, covered with paintings, gilding, and scenes that present Venice as a city chosen by history.\n\nThe strongest contrast comes near the end of the visit. From ceremonial halls you pass toward prisons, narrow corridors, and cells. The palace reminds you that Venice could dazzle with beauty, but it governed with discipline, paperwork, and a very sharp sense of control.",
+        "audio": "audio/en/doges-palace.mp3",
+        "audioDuration": 63
+      }
+    },
+    {
+      "id": "bridge-of-sighs",
+      "order": 4,
+      "coords": {
+        "lat": 45.434,
+        "lng": 12.3409
+      },
+      "image": "images/bridge-of-sighs.webp",
+      "imageThumb": "images/thumbs/bridge-of-sighs.webp",
+      "pl": {
+        "name": "Most Westchnień",
+        "tagline": "Romantyczna nazwa, surowa historia",
+        "text": "Most Westchnień brzmi jak miejsce dla zakochanych, ale jego historia jest znacznie ciemniejsza. Łączy Pałac Dożów z dawnym więzieniem. Skazani przechodzili tędy z sal sądowych do cel, a przez małe kamienne okna mogli po raz ostatni zobaczyć lagunę i światło Wenecji.\n\nNazwa stała się popularna dopiero w epoce romantyzmu. Wyobrażano sobie, że więźniowie wzdychali na widok miasta, które opuszczali na zawsze. W rzeczywistości wielu skazanych trafiało do cel na krótszy czas, ale obraz ostatniego spojrzenia okazał się tak silny, że został z mostem na stałe.\n\nNajlepiej popatrzeć na niego z Ponte della Paglia, przy nabrzeżu. Biały kamień, delikatna dekoracja i wąski kanał tworzą piękny widok. Właśnie dlatego ten most jest tak wenecki: elegancka fasada ukrywa bardzo poważną opowieść o prawie, karze i wolności.",
+        "audio": "audio/pl/bridge-of-sighs.mp3",
+        "audioDuration": 59
+      },
+      "en": {
+        "name": "Bridge of Sighs",
+        "tagline": "A Romantic Name, a Severe Story",
+        "text": "The Bridge of Sighs sounds like a place for lovers, but its history is much darker. It links the Doge's Palace with the old prison. Prisoners crossed it after judgment, moving from the courtrooms toward their cells, and through the small stone windows they could glimpse the lagoon and the light of Venice.\n\nThe name became famous in the Romantic age. Writers imagined prisoners sighing as they saw the city for the last time. In reality, not every sentence was final or lifelong, but the image of one last look was so powerful that it stayed with the bridge forever.\n\nThe best view is from the Ponte della Paglia, beside the waterfront. White stone, delicate carving, and the narrow canal make a beautiful scene. That is what makes the bridge so Venetian: an elegant surface hiding a serious story about law, punishment, and freedom.",
+        "audio": "audio/en/bridge-of-sighs.mp3",
+        "audioDuration": 57
+      }
+    },
+    {
+      "id": "campanile-di-san-marco",
+      "order": 5,
+      "coords": {
+        "lat": 45.434,
+        "lng": 12.339
+      },
+      "image": "images/campanile-di-san-marco.webp",
+      "imageThumb": "images/thumbs/campanile-di-san-marco.webp",
+      "pl": {
+        "name": "Campanile di San Marco",
+        "tagline": "Dzwonnica, która wróciła",
+        "text": "Campanile Świętego Marka jest najłatwiejszym punktem orientacyjnym w Wenecji. Ceglana wieża ma prawie sto metrów wysokości i przez wieki służyła nie tylko jako dzwonnica, lecz także jako znak dla statków wpływających do laguny.\n\nTo, co widzicie, nie jest jednak średniowiecznym oryginałem. W 1902 roku stara wieża nagle runęła. Wenecjanie mieli szczęście: zginęło bardzo niewiele stworzeń, a bazylika została ocalona. Decyzja zapadła szybko: odbudować tam, gdzie była, i taką, jaka była. Włoskie hasło brzmiało dov'era e com'era.\n\nWjazd na górę daje jedną z najlepszych lekcji geografii miasta. Zamiast labiryntu ulic widać całą lagunę: dachy Wenecji, Giudeccę, San Giorgio, Lido i dalekie wyspy. Nagle staje się jasne, że Wenecja nie jest tylko miastem kanałów, ale stolicą wodnego krajobrazu.",
+        "audio": "audio/pl/campanile-di-san-marco.mp3",
+        "audioDuration": 60
+      },
+      "en": {
+        "name": "Campanile di San Marco",
+        "tagline": "The Bell Tower That Returned",
+        "text": "The Campanile of St Mark is the easiest landmark in Venice. The brick tower rises almost one hundred metres and served for centuries not only as a bell tower, but also as a signal point for ships entering the lagoon.\n\nWhat you see is not the medieval original. In 1902 the old tower suddenly collapsed. Venice was lucky: very little life was lost, and the basilica survived. The decision was made quickly: rebuild it where it was and as it was. The Italian phrase was dov'era e com'era.\n\nGoing to the top gives one of the best geography lessons in the city. Instead of a maze of alleys, you see the whole lagoon: Venetian rooftops, Giudecca, San Giorgio, the Lido, and distant islands. Suddenly it becomes clear that Venice is not just a city of canals. It is the capital of a watery landscape.",
+        "audio": "audio/en/campanile-di-san-marco.mp3",
+        "audioDuration": 57
+      }
+    },
+    {
+      "id": "st-marks-clock-tower",
+      "order": 6,
+      "coords": {
+        "lat": 45.4346,
+        "lng": 12.3386
+      },
+      "image": "images/st-marks-clock-tower.webp",
+      "imageThumb": "images/thumbs/st-marks-clock-tower.webp",
+      "pl": {
+        "name": "Wieża Zegarowa Świętego Marka",
+        "tagline": "Czas Republiki",
+        "text": "Wieża Zegarowa stoi przy wejściu na Mercerie, główną handlową drogę prowadzącą od Placu Świętego Marka w stronę Rialto. To nie był przypadkowy adres. Każdy, kto wchodził do politycznego serca miasta, widział, że Wenecja kontroluje nie tylko handel i morze, ale także czas.\n\nNa szczycie wieży dwie brązowe postacie uderzają w dzwon. Nazywa się je Maurami, choć są to raczej symboliczne figury strażników czasu. Poniżej znajduje się tarcza z godzinami, znakami zodiaku i fazami księżyca. Dla miasta kupców taka wiedza była bardzo praktyczna: przypływy, podróże i umowy zależne były od kalendarza.\n\nZatrzymajcie się na chwilę pod łukiem. Pod wami płynie tłum, nad wami pracuje mechanizm, a wokół stoją sklepy. To dobra miniatura Wenecji: piękno, handel, astronomia i teatralny gest w jednym miejscu.",
+        "audio": "audio/pl/st-marks-clock-tower.mp3",
+        "audioDuration": 60
+      },
+      "en": {
+        "name": "St Mark's Clock Tower",
+        "tagline": "The Republic's Timekeeper",
+        "text": "The Clock Tower stands at the entrance to the Mercerie, the main shopping route from St Mark's Square toward Rialto. That position was not accidental. Everyone entering the political heart of Venice could see that the city controlled not only trade and the sea, but time itself.\n\nAt the top, two bronze figures strike the bell. They are called the Moors, though they are really symbolic guardians of time. Below them is a rich clock face showing hours, zodiac signs, and phases of the moon. For a city of merchants and sailors, that information was practical: tides, journeys, contracts, and feast days all depended on the calendar.\n\nPause beneath the arch. Crowds move below, the mechanism works above, and shops surround you. It is a perfect small version of Venice: beauty, commerce, astronomy, and theatrical display all compressed into one place.",
+        "audio": "audio/en/st-marks-clock-tower.mp3",
+        "audioDuration": 57
+      }
+    },
+    {
+      "id": "museo-correr",
+      "order": 7,
+      "coords": {
+        "lat": 45.4339,
+        "lng": 12.3372
+      },
+      "image": "images/museo-correr.webp",
+      "imageThumb": "images/thumbs/museo-correr.webp",
+      "pl": {
+        "name": "Museo Correr",
+        "tagline": "Historia Wenecji w pałacu",
+        "text": "Museo Correr zajmuje skrzydło Placu Świętego Marka zwane napoleońskim. To dobre miejsce, aby zrozumieć Wenecję po cichu, z dala od tłumu stojącego przed bazyliką. W salach muzeum znajdują się mapy, obrazy, dokumenty, monety i przedmioty związane z codziennym życiem republiki.\n\nMuzeum powstało z kolekcji Teodora Correra, wenecjanina, który zbierał pamiątki po upadłym państwie. Republika zakończyła istnienie w 1797 roku, a wiele rodzin sprzedawało wtedy swoje zbiory. Correr ratował fragmenty pamięci miasta, zanim rozproszyły się po Europie.\n\nDla rodzin to dobry przystanek po intensywnym Placu Świętego Marka. Zamiast jednego wielkiego efektu dostajecie wiele małych odkryć: dawne widoki miasta, instrumenty, mundury i portrety ludzi, którzy budowali mit Wenecji.",
+        "audio": "audio/pl/museo-correr.mp3",
+        "audioDuration": 56
+      },
+      "en": {
+        "name": "Museo Correr",
+        "tagline": "Venice's History in a Palace",
+        "text": "Museo Correr occupies the Napoleonic wing of St Mark's Square. It is a good place to understand Venice quietly, away from the crowd in front of the basilica. Its rooms hold maps, paintings, documents, coins, and objects connected with daily life in the republic.\n\nThe museum grew from the collection of Teodoro Correr, a Venetian who gathered memories of a vanished state. The Republic of Venice ended in 1797, and many old families sold their collections in the decades that followed. Correr preserved fragments of the city's memory before they scattered across Europe.\n\nFor families, this is a useful stop after the intensity of St Mark's Square. Instead of one giant spectacle, you get many small discoveries: old views of the city, instruments, uniforms, portraits, and objects that help explain how Venice built its image of power and refinement.",
+        "audio": "audio/en/museo-correr.mp3",
+        "audioDuration": 57
+      }
+    },
+    {
+      "id": "rialto-bridge",
+      "order": 8,
+      "coords": {
+        "lat": 45.438,
+        "lng": 12.3359
+      },
+      "image": "images/rialto-bridge.webp",
+      "imageThumb": "images/thumbs/rialto-bridge.webp",
+      "pl": {
+        "name": "Most Rialto",
+        "tagline": "Kamienny łuk nad handlem",
+        "text": "Most Rialto jest jednym z najbardziej znanych widoków Wenecji, ale najpierw był przede wszystkim praktyczną przeprawą. Przez stulecia okolica Rialto była centrum handlu, banków i rynku. Tu przychodziło się po towary, informacje i pieniądze.\n\nDzisiejszy kamienny most powstał pod koniec XVI wieku. Wcześniejsze konstrukcje były drewniane i nie zawsze dawały sobie radę z tłumem. Nowy most miał być mocny, reprezentacyjny i dochodowy, dlatego na jego grzbiecie umieszczono rząd sklepów.\n\nWejdźcie na środek i spójrzcie na Canal Grande. Gondole, vaporetto, łodzie dostawcze i taksówki wodne mijają się pod wami jak ruch uliczny w zwykłym mieście. Rialto pokazuje, że w Wenecji kanał był drogą, placem, magazynem i sceną jednocześnie.",
+        "audio": "audio/pl/rialto-bridge.mp3",
+        "audioDuration": 54
+      },
+      "en": {
+        "name": "Rialto Bridge",
+        "tagline": "A Stone Arch Over Commerce",
+        "text": "The Rialto Bridge is one of Venice's most famous views, but it began as a practical crossing. For centuries the Rialto area was the centre of trade, banking, and markets. People came here for goods, information, and money.\n\nThe stone bridge you see today was built at the end of the sixteenth century. Earlier versions were wooden and did not always cope well with the crowds. The new bridge had to be strong, impressive, and profitable, so rows of shops were built along its spine.\n\nStand in the middle and look down the Grand Canal. Gondolas, vaporetti, delivery boats, and water taxis pass below like traffic in an ordinary city. Rialto shows how Venice worked: a canal could be a road, a square, a warehouse route, and a stage all at once.",
+        "audio": "audio/en/rialto-bridge.mp3",
+        "audioDuration": 51
+      }
+    },
+    {
+      "id": "rialto-market",
+      "order": 9,
+      "coords": {
+        "lat": 45.4392,
+        "lng": 12.3358
+      },
+      "image": "images/rialto-market.webp",
+      "imageThumb": "images/thumbs/rialto-market.webp",
+      "pl": {
+        "name": "Targ Rialto",
+        "tagline": "Kuchnia laguny",
+        "text": "Targ Rialto to jedno z miejsc, gdzie Wenecja nadal pachnie codziennym życiem. Rano pojawiają się tu ryby z laguny i Adriatyku, warzywa z okolicznych wysp, owoce, przyprawy i głosy sprzedawców. To nie jest tylko ładny zabytek, ale działający fragment miasta.\n\nPrzez wieki Rialto było gospodarczym sercem Wenecji. W pobliżu załatwiano interesy, wymieniano pieniądze i rozładowywano towary. Rynek pokazuje skromniejszą, ale bardzo ważną stronę republiki: wielka historia potrzebowała codziennych dostaw.\n\nDzieciom warto pokazać nazwy ryb i dziwne kształty owoców morza. Dorośli zobaczą, jak blisko są tu kuchnia, geografia i handel. Najlepiej przyjść rano, zanim stragany zaczną znikać, a okolica zamieni się głównie w trasę spacerową.",
+        "audio": "audio/pl/rialto-market.mp3",
+        "audioDuration": 54
+      },
+      "en": {
+        "name": "Rialto Market",
+        "tagline": "The Lagoon's Kitchen",
+        "text": "Rialto Market is one of the places where Venice still smells like daily life. In the morning you find fish from the lagoon and the Adriatic, vegetables from nearby islands, fruit, spices, and the voices of vendors. It is not just a pretty historic setting, but a working piece of the city.\n\nFor centuries Rialto was Venice's economic heart. Deals were made nearby, money was exchanged, and goods were unloaded. The market shows a humbler but essential side of the republic: grand history still needed daily deliveries.\n\nFor children, the fish names and strange shapes of seafood can be the best part. Adults can see how closely food, geography, and trade connect here. Come in the morning if you can, before the stalls disappear and the area becomes mainly a walking route between famous sights.",
+        "audio": "audio/en/rialto-market.mp3",
+        "audioDuration": 54
+      }
+    },
+    {
+      "id": "grand-canal",
+      "order": 10,
+      "coords": {
+        "lat": 45.4368,
+        "lng": 12.3298
+      },
+      "image": "images/grand-canal.webp",
+      "imageThumb": "images/thumbs/grand-canal.webp",
+      "pl": {
+        "name": "Canal Grande",
+        "tagline": "Główna ulica z wody",
+        "text": "Canal Grande jest główną ulicą Wenecji, tylko zamiast asfaltu ma wodę. Ma kształt wielkiej litery S i przecina miasto od dworca kolejowego aż po okolice Placu Świętego Marka. Najlepiej poznaje się go z vaporetto, zwykłego wodnego autobusu.\n\nPo obu stronach stoją pałace dawnych rodów kupieckich. Ich najpiękniejsze fasady zwrócone są do kanału, bo to właśnie od wody przybywali goście, towary i wiadomości. Parter często służył jako magazyn, wyższe piętra jako reprezentacyjne mieszkania.\n\nPodczas rejsu warto patrzeć na szczegóły: balkony, herby, marmury, ślady dawnych drzwi wodnych. Canal Grande opowiada historię miasta bez jednej sali muzealnej. Wystarczy usiąść przy oknie i pozwolić, aby Wenecja przesuwała się powoli obok.",
+        "audio": "audio/pl/grand-canal.mp3",
+        "audioDuration": 53
+      },
+      "en": {
+        "name": "Grand Canal",
+        "tagline": "The Main Street Made of Water",
+        "text": "The Grand Canal is Venice's main street, except that it is made of water. It forms a huge S through the city, running from the railway station toward the basin near St Mark's. The best way to experience it is from a vaporetto, the ordinary public water bus.\n\nOn both sides stand the palaces of old merchant families. Their finest facades face the canal, because guests, goods, and news arrived by water. The ground floor often worked as a warehouse, while the upper floors held the grand living rooms.\n\nAs you ride, look for details: balconies, coats of arms, marble patterns, and traces of old water doors. The Grand Canal tells the story of Venice without needing a museum room. Sit by the window and let the city slide slowly past.",
+        "audio": "audio/en/grand-canal.mp3",
+        "audioDuration": 53
+      }
+    },
+    {
+      "id": "ca-doro",
+      "order": 11,
+      "coords": {
+        "lat": 45.4409,
+        "lng": 12.3335
+      },
+      "image": "images/ca-doro.webp",
+      "imageThumb": "images/thumbs/ca-doro.webp",
+      "pl": {
+        "name": "Ca' d'Oro",
+        "tagline": "Złoty dom nad kanałem",
+        "text": "Ca' d'Oro oznacza Złoty Dom. Dziś fasada jest jasna i elegancka, ale kiedy pałac był nowy, zdobiły ją kolory i pozłota. Musiał wyglądać jak bogata koronka rozciągnięta nad Canal Grande.\n\nPałac powstał w XV wieku dla rodziny Contarini i jest jednym z najpiękniejszych przykładów gotyku weneckiego. Ten styl lubi lekkość, łuki, marmur i rytm powtarzających się okien. Budynek mówi: jesteśmy bogaci, ale mamy dobry gust.\n\nW środku znajduje się dziś galeria sztuki. Nawet jeśli oglądacie tylko fasadę z vaporetto, warto zwrócić uwagę na asymetrię. Wenecjanie nie zawsze szukali idealnej równowagi. Czasem ważniejsze było dopasowanie do działki, kanału i funkcji. Dzięki temu miasto wygląda żywo, nie jak rysunek z linijką.",
+        "audio": "audio/pl/ca-doro.mp3",
+        "audioDuration": 55
+      },
+      "en": {
+        "name": "Ca' d'Oro",
+        "tagline": "The Golden House on the Canal",
+        "text": "Ca' d'Oro means House of Gold. Today the facade is pale and elegant, but when the palace was new it was decorated with colour and gilding. It must have looked like a piece of rich lace stretched above the Grand Canal.\n\nThe palace was built in the fifteenth century for the Contarini family and is one of the finest examples of Venetian Gothic architecture. This style loves lightness, arches, marble, and the rhythm of repeated windows. The building says: we are wealthy, but we also have taste.\n\nInside is now an art gallery. Even if you only see the facade from a vaporetto, notice its asymmetry. Venetians did not always chase perfect balance. Sometimes it was more important to fit the plot, the canal, and the building's function. That is why Venice feels alive rather than drawn with a ruler.",
+        "audio": "audio/en/ca-doro.mp3",
+        "audioDuration": 54
+      }
+    },
+    {
+      "id": "frari-basilica",
+      "order": 12,
+      "coords": {
+        "lat": 45.4363,
+        "lng": 12.3267
+      },
+      "image": "images/frari-basilica.webp",
+      "imageThumb": "images/thumbs/frari-basilica.webp",
+      "pl": {
+        "name": "Bazylika Frari",
+        "tagline": "Cegła, cisza i Tycjan",
+        "text": "Bazylika Frari jest ogromna, ale z zewnątrz prawie surowa. Franciszkanie nie potrzebowali marmurowej fasady jak przy Placu Świętego Marka. Wybrali cegłę, wysokie ściany i przestrzeń, która miała prowadzić myśli ku górze.\n\nW środku czeka jednak jedno z najważniejszych spotkań ze sztuką w Wenecji. Na ołtarzu głównym znajduje się Wniebowzięcie Tycjana, obraz pełen ruchu, czerwieni i światła. W kościele są też grobowce wielkich Wenecjan, w tym samego Tycjana i kompozytora Claudia Monteverdiego.\n\nFrari pokazuje inną Wenecję niż ta z pocztówek: mniej błysku, więcej skupienia. Warto wejść powoli, pozwolić oczom przyzwyczaić się do półmroku i zobaczyć, jak prosty ceglany kościół stał się jednym z najbogatszych skarbców sztuki miasta.",
+        "audio": "audio/pl/frari-basilica.mp3",
+        "audioDuration": 52
+      },
+      "en": {
+        "name": "Basilica di Santa Maria Gloriosa dei Frari",
+        "tagline": "Brick, Silence, and Titian",
+        "text": "The Frari Basilica is enormous, but from the outside it is almost plain. The Franciscans did not need a marble facade like St Mark's. They chose brick, high walls, and a space meant to lift the mind upward.\n\nInside, however, you meet some of the most important art in Venice. On the high altar is Titian's Assumption of the Virgin, a painting full of movement, red colour, and light. The church also holds tombs of major Venetians, including Titian himself and the composer Claudio Monteverdi.\n\nThe Frari shows a different Venice from the postcard version: less glitter, more concentration. Enter slowly, let your eyes adjust to the dimness, and notice how a simple brick church became one of the richest artistic treasure houses in the city.",
+        "audio": "audio/en/frari-basilica.mp3",
+        "audioDuration": 49
+      }
+    },
+    {
+      "id": "scuola-grande-di-san-rocco",
+      "order": 13,
+      "coords": {
+        "lat": 45.436,
+        "lng": 12.3255
+      },
+      "image": "images/scuola-grande-di-san-rocco.webp",
+      "imageThumb": "images/thumbs/scuola-grande-di-san-rocco.webp",
+      "pl": {
+        "name": "Scuola Grande di San Rocco",
+        "tagline": "Tintoretto od podłogi po sufit",
+        "text": "Scuola Grande di San Rocco była siedzibą bractwa religijnego i dobroczynnego. Takie scuole odgrywały w Wenecji wielką rolę: organizowały pomoc, procesje, opiekę i prestiż swoich członków. San Rocco stało się szczególnie ważne, bo święty Roch był patronem chroniącym przed zarazą.\n\nNajwiększym skarbem budynku są obrazy Tintoretta. Artysta pracował tu przez wiele lat i pokrył sale dramatycznymi scenami biblijnymi. Nie ogląda się jednego obrazu, lecz całe otoczenie: ściany, sufit, światło i cień tworzą wielki teatr malarstwa.\n\nTo dobre miejsce, aby odpocząć od spaceru i patrzeć w górę. Weźcie lusterko, jeśli jest dostępne, albo po prostu usiądźcie. San Rocco uczy, że w Wenecji sztuka była nie tylko dekoracją. Była sposobem opowiadania, modlitwy i rywalizacji o pamięć.",
+        "audio": "audio/pl/scuola-grande-di-san-rocco.mp3",
+        "audioDuration": 58
+      },
+      "en": {
+        "name": "Scuola Grande di San Rocco",
+        "tagline": "Tintoretto from Floor to Ceiling",
+        "text": "The Scuola Grande di San Rocco was the headquarters of a religious and charitable brotherhood. These scuole played a major role in Venice: they organized aid, processions, care, and public prestige for their members. San Rocco was especially important because St Roch was invoked against plague.\n\nThe building's greatest treasure is its cycle of paintings by Tintoretto. The artist worked here for many years, covering the rooms with dramatic biblical scenes. You do not look at just one painting. You stand inside an environment where walls, ceiling, light, and shadow become a theatre of painting.\n\nThis is a good place to pause and look upward. Use a mirror if one is available, or simply sit for a while. San Rocco teaches that in Venice art was not only decoration. It was storytelling, prayer, and a competition for memory.",
+        "audio": "audio/en/scuola-grande-di-san-rocco.mp3",
+        "audioDuration": 55
+      }
+    },
+    {
+      "id": "ca-rezzonico",
+      "order": 14,
+      "coords": {
+        "lat": 45.4338,
+        "lng": 12.3267
+      },
+      "image": "images/ca-rezzonico.webp",
+      "imageThumb": "images/thumbs/ca-rezzonico.webp",
+      "pl": {
+        "name": "Ca' Rezzonico",
+        "tagline": "Wenecja XVIII wieku",
+        "text": "Ca' Rezzonico to pałac nad Canal Grande, który przenosi was do Wenecji XVIII wieku. To czas masek, salonów, muzyki, bogatych dekoracji i powolnego końca dawnej republiki. Miasto wciąż było olśniewające, ale jego polityczna potęga słabła.\n\nW muzeum zobaczycie meble, freski, obrazy i wnętrza pokazujące życie arystokracji. Szczególnie ciekawe jest to, że luksus miesza się tu z lekkim niepokojem. Wszystko jest piękne, ale wiemy, że niedługo Napoleon zamknie wielki rozdział historii Wenecji.\n\nDla dzieci może to być pałac wyobraźni: sale jak scenografia, sufity jak niebo, postacie z perukami i maskami. Dla dorosłych to opowieść o mieście, które potrafiło bawić się z niezwykłą elegancją, nawet gdy świat wokół już się zmieniał.",
+        "audio": "audio/pl/ca-rezzonico.mp3",
+        "audioDuration": 56
+      },
+      "en": {
+        "name": "Ca' Rezzonico",
+        "tagline": "Eighteenth-Century Venice",
+        "text": "Ca' Rezzonico is a palace on the Grand Canal that carries you into eighteenth-century Venice. This was the age of masks, salons, music, rich decoration, and the slow ending of the old republic. The city was still dazzling, but its political power was fading.\n\nInside the museum you see furniture, frescoes, paintings, and rooms that show aristocratic life. What makes it especially interesting is the mixture of luxury and unease. Everything is beautiful, but we know that Napoleon will soon close a long chapter of Venetian history.\n\nFor children, it can feel like a palace of imagination: rooms like stage sets, ceilings like skies, figures in wigs and masks. For adults, it is a story about a city that knew how to entertain itself with extraordinary elegance, even while the world around it was changing.",
+        "audio": "audio/en/ca-rezzonico.mp3",
+        "audioDuration": 59
+      }
+    },
+    {
+      "id": "gallerie-accademia",
+      "order": 15,
+      "coords": {
+        "lat": 45.431,
+        "lng": 12.3283
+      },
+      "image": "images/gallerie-accademia.webp",
+      "imageThumb": "images/thumbs/gallerie-accademia.webp",
+      "pl": {
+        "name": "Gallerie dell'Accademia",
+        "tagline": "Największa lekcja malarstwa Wenecji",
+        "text": "Gallerie dell'Accademia to najważniejsze miejsce dla tych, którzy chcą zobaczyć, jak Wenecja malowała samą siebie i świat. Znajdują się tu dzieła Belliniego, Giorgionego, Tycjana, Veronesa, Tintoretta i wielu innych artystów związanych z miastem.\n\nWenecjanie kochali kolor, światło i materiał. Ich obrazy często wydają się bardziej zmysłowe niż precyzyjne rysunki florenckie. Woda, tkaniny, złoto, skóra i niebo mają tu niemal fizyczną obecność.\n\nNie trzeba oglądać wszystkiego. Lepiej wybrać kilka sal i patrzeć uważnie. Zauważcie, jak malarze budują dramat gestem, spojrzeniem i kolorem. Accademia pomaga potem inaczej zobaczyć całe miasto, bo fasady, kościoły i kanały zaczynają wyglądać jak część tej samej wielkiej palety.",
+        "audio": "audio/pl/gallerie-accademia.mp3",
+        "audioDuration": 56
+      },
+      "en": {
+        "name": "Gallerie dell'Accademia",
+        "tagline": "Venice's Great Painting Lesson",
+        "text": "The Gallerie dell'Accademia is the essential place to see how Venice painted itself and the world. It holds works by Bellini, Giorgione, Titian, Veronese, Tintoretto, and many other artists connected with the city.\n\nVenetian painters loved colour, light, and material surfaces. Their pictures often feel more sensual than the precise drawings associated with Florence. Water, fabric, gold, skin, and sky seem almost physically present.\n\nYou do not need to see everything. It is better to choose a few rooms and look carefully. Notice how painters build drama through gesture, gaze, and colour. After visiting the Accademia, the whole city can look different, because facades, churches, and canals begin to feel like part of the same great palette.",
+        "audio": "audio/en/gallerie-accademia.mp3",
+        "audioDuration": 53
+      }
+    },
+    {
+      "id": "peggy-guggenheim-collection",
+      "order": 16,
+      "coords": {
+        "lat": 45.4308,
+        "lng": 12.3317
+      },
+      "image": "images/peggy-guggenheim-collection.webp",
+      "imageThumb": "images/thumbs/peggy-guggenheim-collection.webp",
+      "pl": {
+        "name": "Kolekcja Peggy Guggenheim",
+        "tagline": "Nowoczesność nad Canal Grande",
+        "text": "Kolekcja Peggy Guggenheim znajduje się w niezwykłym pałacu nad Canal Grande. Budynek jest niski, bo nigdy nie ukończono go według pierwotnych planów. Dzięki temu wygląda inaczej niż sąsiednie palazzi i pasuje do historii właścicielki: osoby niezależnej, odważnej i nieoczywistej.\n\nPeggy Guggenheim kolekcjonowała sztukę XX wieku i wspierała artystów, zanim stali się powszechnie znani. W jej domu można zobaczyć dzieła surrealistów, kubistów i ekspresjonistów abstrakcyjnych. To duża zmiana po złocie bazylik i renesansowych obrazach.\n\nMuzeum pokazuje, że Wenecja nie jest tylko skansenem. Miasto od dawna przyciągało ludzi, którzy chcieli eksperymentować, zbierać i rozmawiać ze światem. Ogród, taras nad kanałem i nowoczesne obrazy tworzą spokojną, ale bardzo świeżą przerwę w zwiedzaniu.",
+        "audio": "audio/pl/peggy-guggenheim-collection.mp3",
+        "audioDuration": 59
+      },
+      "en": {
+        "name": "Peggy Guggenheim Collection",
+        "tagline": "Modern Art on the Grand Canal",
+        "text": "The Peggy Guggenheim Collection sits in an unusual palace on the Grand Canal. The building is low because it was never completed according to its original plans. That makes it look different from the neighbouring palazzi and suits the story of its owner: independent, bold, and unexpected.\n\nPeggy Guggenheim collected twentieth-century art and supported artists before many of them became famous. In her former home you can see Surrealism, Cubism, and Abstract Expressionism. It is a striking change after golden basilicas and Renaissance paintings.\n\nThe museum shows that Venice is not only an open-air museum of the past. The city has long attracted people who wanted to experiment, collect, and speak with the wider world. The garden, the terrace over the canal, and the modern paintings make this a calm but fresh pause in the itinerary.",
+        "audio": "audio/en/peggy-guggenheim-collection.mp3",
+        "audioDuration": 57
+      }
+    },
+    {
+      "id": "santa-maria-della-salute",
+      "order": 17,
+      "coords": {
+        "lat": 45.4307,
+        "lng": 12.334
+      },
+      "image": "images/santa-maria-della-salute.webp",
+      "imageThumb": "images/thumbs/santa-maria-della-salute.webp",
+      "pl": {
+        "name": "Santa Maria della Salute",
+        "tagline": "Kościół wdzięczności po zarazie",
+        "text": "Bazylika Santa Maria della Salute stoi przy wejściu do Canal Grande jak wielka kamienna korona. Powstała jako podziękowanie za ocalenie miasta po straszliwej epidemii dżumy w XVII wieku. Sama nazwa Salute oznacza zdrowie i zbawienie.\n\nArchitekt Baldassare Longhena zaprojektował budowlę, którą widać z daleka: okrągła forma, wielka kopuła, schody schodzące do wody. Kościół stał się jednym z najważniejszych elementów panoramy Wenecji.\n\nCo roku 21 listopada odbywa się Festa della Salute. Wenecjanie przechodzą wtedy przez tymczasowy most i zapalają świece, prosząc o zdrowie. To piękny przykład, jak historia miasta nadal żyje w rytuale. Dla odwiedzających Salute jest nie tylko ładnym widokiem, ale pamiątką po strachu, wdzięczności i wspólnocie.",
+        "audio": "audio/pl/santa-maria-della-salute.mp3",
+        "audioDuration": 56
+      },
+      "en": {
+        "name": "Basilica di Santa Maria della Salute",
+        "tagline": "A Church of Thanks After Plague",
+        "text": "Santa Maria della Salute stands at the entrance to the Grand Canal like a great stone crown. It was built as an act of thanks after Venice survived a terrible plague in the seventeenth century. The name Salute means both health and salvation.\n\nThe architect Baldassare Longhena designed a building that could be seen from far away: a round form, a huge dome, and steps descending toward the water. The church became one of the defining shapes of the Venetian skyline.\n\nEvery year on 21 November, Venice celebrates the Festa della Salute. People cross a temporary bridge and light candles, praying for health. It is a beautiful example of how the city's history still lives through ritual. For visitors, the Salute is not only a fine view, but a memory of fear, gratitude, and community.",
+        "audio": "audio/en/santa-maria-della-salute.mp3",
+        "audioDuration": 55
+      }
+    },
+    {
+      "id": "teatro-la-fenice",
+      "order": 18,
+      "coords": {
+        "lat": 45.4337,
+        "lng": 12.3339
+      },
+      "image": "images/teatro-la-fenice.webp",
+      "imageThumb": "images/thumbs/teatro-la-fenice.webp",
+      "pl": {
+        "name": "Teatro La Fenice",
+        "tagline": "Opera, która powstaje z popiołów",
+        "text": "Nazwa La Fenice oznacza Feniksa, ptaka, który odradza się z popiołów. W przypadku tego teatru to nie tylko poetycka metafora. Budynek płonął kilkakrotnie, w tym dramatycznie w 1996 roku, a mimo to za każdym razem wracał do życia.\n\nOd końca XVIII wieku La Fenice należała do najważniejszych scen operowych Europy. Wystawiano tu premiery dzieł Rossiniego, Belliniego, Donizettiego i Verdiego. Wenecka publiczność była wymagająca, a sukces w tym teatrze mógł oznaczać wielką karierę.\n\nNawet jeśli nie idziecie na spektakl, warto zobaczyć fasadę i wyobrazić sobie złoty blask sali. La Fenice przypomina, że Wenecja była nie tylko miastem kupców i malarzy. Była także miastem muzyki, głosu, plotek i wieczornego oczekiwania na podniesienie kurtyny.",
+        "audio": "audio/pl/teatro-la-fenice.mp3",
+        "audioDuration": 55
+      },
+      "en": {
+        "name": "Teatro La Fenice",
+        "tagline": "The Opera House That Rises Again",
+        "text": "La Fenice means the Phoenix, the bird that rises from its ashes. For this theatre, the name is more than a poetic image. The building burned several times, including a devastating fire in 1996, yet each time it returned to life.\n\nSince the late eighteenth century, La Fenice has been one of Europe's great opera houses. Premieres of works by Rossini, Bellini, Donizetti, and Verdi took place here. Venetian audiences were demanding, and success on this stage could mean a major career.\n\nEven if you do not attend a performance, look at the facade and imagine the golden glow of the auditorium. La Fenice reminds you that Venice was not only a city of merchants and painters. It was also a city of music, voices, gossip, and evening anticipation before the curtain rose.",
+        "audio": "audio/en/teatro-la-fenice.mp3",
+        "audioDuration": 53
+      }
+    },
+    {
+      "id": "libreria-acqua-alta",
+      "order": 19,
+      "coords": {
+        "lat": 45.4379,
+        "lng": 12.3414
+      },
+      "image": "images/libreria-acqua-alta.webp",
+      "imageThumb": "images/thumbs/libreria-acqua-alta.webp",
+      "pl": {
+        "name": "Libreria Acqua Alta",
+        "tagline": "Książki przygotowane na wysoką wodę",
+        "text": "Libreria Acqua Alta to księgarnia, która zrobiła z weneckiego problemu część swojego uroku. Ponieważ woda potrafi wejść do wnętrza podczas acqua alta, książki leżą w wannach, łodziach i gondolach. Wygląda to jak żart, ale ma bardzo praktyczny sens.\n\nW środku panuje kontrolowany chaos: stosy książek, koty, pocztówki, mapy, schody z dawnych tomów i widok na kanał. To miejsce nie jest eleganckim muzeum, tylko żywym, ciasnym labiryntem papieru.\n\nWarto jednak pamiętać, że jest popularne i bywa zatłoczone. Najlepiej wejść z cierpliwością, kupić drobiazg, jeśli robicie zdjęcia, i potraktować księgarnię jako lekką przerwę. Pokazuje ona Wenecję codzienną: pomysłową, trochę ekscentryczną i zawsze gotową negocjować z wodą.",
+        "audio": "audio/pl/libreria-acqua-alta.mp3",
+        "audioDuration": 55
+      },
+      "en": {
+        "name": "Libreria Acqua Alta",
+        "tagline": "Books Ready for High Water",
+        "text": "Libreria Acqua Alta is a bookshop that turned a Venetian problem into part of its charm. Because water can enter during acqua alta, books are stored in bathtubs, boats, and gondolas. It looks like a joke, but it is also practical.\n\nInside is a kind of controlled chaos: piles of books, cats, postcards, maps, steps made from old volumes, and a view toward the canal. This is not an elegant museum. It is a living, narrow maze of paper.\n\nRemember that it is popular and can be crowded. Enter with patience, buy something small if you take photos, and treat the shop as a light pause in the day. It shows everyday Venice at its most inventive: a little eccentric, full of character, and always negotiating with water.",
+        "audio": "audio/en/libreria-acqua-alta.mp3",
+        "audioDuration": 52
+      }
+    },
+    {
+      "id": "venetian-arsenal",
+      "order": 20,
+      "coords": {
+        "lat": 45.4352,
+        "lng": 12.3531
+      },
+      "image": "images/venetian-arsenal.webp",
+      "imageThumb": "images/thumbs/venetian-arsenal.webp",
+      "pl": {
+        "name": "Arsenał Wenecki",
+        "tagline": "Fabryka morskiej potęgi",
+        "text": "Arsenał był przemysłowym sercem dawnej Wenecji. Za jego murami budowano i wyposażano statki, które dawały republice bogactwo i bezpieczeństwo. W czasach swojej największej sprawności był jednym z najbardziej imponujących kompleksów produkcyjnych Europy.\n\nTo tutaj rzemieślnicy, cieśle, kowale, linarze i urzędnicy pracowali w systemie przypominającym wczesną linię montażową. Wenecja rozumiała, że panowanie na morzu wymaga nie tylko odwagi, ale organizacji, materiałów i logistyki.\n\nDziś wiele części Arsenału nie jest swobodnie dostępnych, ale już sama brama z lwami robi wrażenie. To dobry punkt, aby opowiedzieć dzieciom, że za romantycznymi gondolami stała twarda technologia. Wenecja była piękna, bo była również bardzo praktyczna.",
+        "audio": "audio/pl/venetian-arsenal.mp3",
+        "audioDuration": 52
+      },
+      "en": {
+        "name": "Venetian Arsenal",
+        "tagline": "The Factory of Sea Power",
+        "text": "The Arsenal was the industrial heart of old Venice. Behind its walls, ships were built and equipped, giving the republic wealth and security. At its most efficient, it was one of the most impressive production complexes in Europe.\n\nHere shipwrights, carpenters, blacksmiths, rope makers, and officials worked in a system sometimes compared to an early assembly line. Venice understood that ruling the sea required not only courage, but organization, materials, and logistics.\n\nToday many parts of the Arsenal are not freely accessible, but the gate with its lions is already powerful. It is a good place to tell children that behind romantic gondolas stood hard technology. Venice was beautiful partly because it was also extremely practical.",
+        "audio": "audio/en/venetian-arsenal.mp3",
+        "audioDuration": 50
+      }
+    },
+    {
+      "id": "jewish-ghetto-cannaregio",
+      "order": 21,
+      "coords": {
+        "lat": 45.445,
+        "lng": 12.3264
+      },
+      "image": "images/jewish-ghetto-cannaregio.webp",
+      "imageThumb": "images/thumbs/jewish-ghetto-cannaregio.webp",
+      "pl": {
+        "name": "Getto żydowskie i Cannaregio",
+        "tagline": "Cicha historia północnej Wenecji",
+        "text": "W Cannaregio znajduje się dawne getto żydowskie, jedno z najważniejszych miejsc pamięci w Wenecji. Samo słowo getto pochodzi właśnie stąd, od nazwy terenu związanego dawniej z odlewnią. Od XVI wieku władze nakazywały Żydom mieszkać w tej wydzielonej części miasta.\n\nPrzestrzeń była ograniczona, więc domy rosły w górę. Warto spojrzeć na nietypowo wysokie budynki i spokojne place. Za prostymi fasadami ukrywały się synagogi różnych wspólnot: niemieckiej, włoskiej, hiszpańskiej i lewantyńskiej.\n\nTo miejsce wymaga spokojnego tonu. Opowiada o przymusie, ale też o kulturze, handlu, nauce i przetrwaniu. Po wyjściu z getta Cannaregio pokazuje mniej zatłoczoną Wenecję: z długimi kanałami, lokalnymi barami i wieczornym życiem mieszkańców.",
+        "audio": "audio/pl/jewish-ghetto-cannaregio.mp3",
+        "audioDuration": 55
+      },
+      "en": {
+        "name": "Jewish Ghetto and Cannaregio",
+        "tagline": "The Quiet History of Northern Venice",
+        "text": "Cannaregio holds the old Jewish Ghetto, one of Venice's most important places of memory. The word ghetto itself comes from here, from an area once connected with a foundry. From the sixteenth century, Venetian authorities required Jews to live in this restricted part of the city.\n\nSpace was limited, so the buildings rose upward. Look for the unusually tall houses and quiet squares. Behind plain facades were synagogues serving different communities: German, Italian, Spanish, and Levantine.\n\nThis place asks for a calm tone. It tells a story of restriction, but also of culture, trade, learning, and survival. After leaving the ghetto, Cannaregio shows a less crowded Venice, with long canals, local bars, and evening life that still belongs strongly to residents.",
+        "audio": "audio/en/jewish-ghetto-cannaregio.mp3",
+        "audioDuration": 54
+      }
+    },
+    {
+      "id": "san-giorgio-maggiore",
+      "order": 22,
+      "coords": {
+        "lat": 45.4287,
+        "lng": 12.3431
+      },
+      "image": "images/san-giorgio-maggiore.webp",
+      "imageThumb": "images/thumbs/san-giorgio-maggiore.webp",
+      "pl": {
+        "name": "San Giorgio Maggiore",
+        "tagline": "Wyspa z najlepszym widokiem",
+        "text": "San Giorgio Maggiore leży naprzeciw Placu Świętego Marka, ale atmosfera jest tu znacznie spokojniejsza. Krótki rejs wystarczy, aby spojrzeć na Wenecję z dystansu. Nagle Pałac Dożów, bazylika i campanile układają się w panoramę, którą znacie z obrazów i pocztówek.\n\nNajważniejszym budynkiem wyspy jest kościół zaprojektowany przez Andrea Palladia. Jego jasna fasada jest uporządkowana, klasyczna i bardzo inna od bizantyjskiego przepychu Świętego Marka. W środku można zobaczyć obrazy Tintoretta.\n\nNajwiększa nagroda czeka na górze dzwonnicy. Widok obejmuje całe centrum, Giudeccę, Lido i lagunę. To idealny moment, aby zrozumieć, że Wenecja najlepiej wygląda nie tylko z bliska, ale także jako delikatna sylwetka pomiędzy niebem i wodą.",
+        "audio": "audio/pl/san-giorgio-maggiore.mp3",
+        "audioDuration": 55
+      },
+      "en": {
+        "name": "San Giorgio Maggiore",
+        "tagline": "The Island with the Best View",
+        "text": "San Giorgio Maggiore lies opposite St Mark's Square, but the atmosphere is much calmer. A short boat ride is enough to see Venice from a distance. Suddenly the Doge's Palace, the basilica, and the campanile form the skyline you know from paintings and postcards.\n\nThe island's main building is the church designed by Andrea Palladio. Its pale facade is ordered, classical, and very different from the Byzantine richness of St Mark's. Inside are paintings by Tintoretto.\n\nThe greatest reward waits at the top of the bell tower. The view takes in the historic centre, Giudecca, the Lido, and the lagoon. It is the perfect moment to understand that Venice is best seen not only close up, but also as a delicate silhouette between sky and water.",
+        "audio": "audio/en/san-giorgio-maggiore.mp3",
+        "audioDuration": 51
+      }
+    },
+    {
+      "id": "giudecca-redentore",
+      "order": 23,
+      "coords": {
+        "lat": 45.4255,
+        "lng": 12.3296
+      },
+      "image": "images/giudecca-redentore.webp",
+      "imageThumb": "images/thumbs/giudecca-redentore.webp",
+      "pl": {
+        "name": "Giudecca i Il Redentore",
+        "tagline": "Szeroka woda i kościół obietnicy",
+        "text": "Giudecca leży na południe od głównego centrum Wenecji, po drugiej stronie szerokiego kanału. Jest blisko, ale czuje się inaczej: mniej tu ciasnych ulic, więcej oddechu, warsztatów, domów i widoków na panoramę miasta.\n\nNajważniejszym punktem jest kościół Il Redentore, zaprojektowany przez Palladia. Powstał jako dziękczynienie po epidemii dżumy w XVI wieku. Co roku podczas Festa del Redentore buduje się tymczasowy most przez kanał, a Wenecjanie idą do kościoła w procesji.\n\nGiudecca jest dobra na spokojniejszy spacer. Z nabrzeża widać San Marco jak teatralną dekorację po drugiej stronie wody. To miejsce pokazuje, że Wenecja ma nie tylko centrum pełne zabytków, lecz także dzielnice, gdzie historia miesza się z codziennym rytmem mieszkańców.",
+        "audio": "audio/pl/giudecca-redentore.mp3",
+        "audioDuration": 51
+      },
+      "en": {
+        "name": "Giudecca and Il Redentore",
+        "tagline": "Wide Water and a Church of Promise",
+        "text": "Giudecca lies south of Venice's main centre, across a broad canal. It is close, but it feels different: fewer tight alleys, more open air, workshops, homes, and views back toward the city's skyline.\n\nThe key landmark is Il Redentore, the church designed by Palladio. It was built as a thanksgiving after a plague in the sixteenth century. Every year during the Festa del Redentore, a temporary bridge is built across the canal and Venetians walk to the church in procession.\n\nGiudecca is good for a quieter walk. From the waterfront, San Marco looks like a stage set across the water. This place shows that Venice is not only a centre packed with monuments, but also a set of neighbourhoods where history mixes with the daily rhythm of residents.",
+        "audio": "audio/en/giudecca-redentore.mp3",
+        "audioDuration": 51
+      }
+    },
+    {
+      "id": "murano-glass-museum",
+      "order": 24,
+      "coords": {
+        "lat": 45.4569,
+        "lng": 12.3531
+      },
+      "image": "images/murano-glass-museum.webp",
+      "imageThumb": "images/thumbs/murano-glass-museum.webp",
+      "pl": {
+        "name": "Muzeum Szkła na Murano",
+        "tagline": "Tysiąc lat ognia i piasku",
+        "text": "Murano od wieków kojarzy się ze szkłem. W średniowieczu przeniesiono tu piece szklarskie z centrum Wenecji, częściowo z obawy przed pożarami, a częściowo po to, by lepiej kontrolować cenne umiejętności rzemieślników.\n\nMuzeum Szkła pokazuje, jak z piasku, ognia i tajemnicy powstawały przedmioty pożądane w całej Europie. Zobaczycie delikatne kielichy, kolorowe paciorki, lustra, eksperymenty techniczne i współczesne formy artystyczne.\n\nDla dzieci najciekawsza jest myśl, że szkło zaczyna jako rozgrzana, miękka masa. Dla dorosłych: że weneckie bogactwo opierało się nie tylko na handlu, ale też na mistrzostwie produkcji. Po muzeum inaczej patrzy się na witryny sklepowe Murano, nawet jeśli nie wszystko, co błyszczy, jest arcydziełem.",
+        "audio": "audio/pl/murano-glass-museum.mp3",
+        "audioDuration": 54
+      },
+      "en": {
+        "name": "Murano Glass Museum",
+        "tagline": "A Thousand Years of Fire and Sand",
+        "text": "Murano has been linked with glass for centuries. In the Middle Ages, glass furnaces were moved here from central Venice, partly because of fire risk and partly so the republic could better control the valuable skills of glassmakers.\n\nThe Glass Museum shows how sand, fire, and guarded knowledge became objects desired across Europe. You can see delicate goblets, coloured beads, mirrors, technical experiments, and modern artistic forms.\n\nFor children, the most fascinating idea may be that glass begins as a hot, soft mass. For adults, the lesson is that Venetian wealth depended not only on trade, but also on skilled production. After the museum, Murano's shop windows look different, even if not everything that sparkles is a masterpiece.",
+        "audio": "audio/en/murano-glass-museum.mp3",
+        "audioDuration": 49
+      }
+    },
+    {
+      "id": "santa-maria-san-donato-murano",
+      "order": 25,
+      "coords": {
+        "lat": 45.4575,
+        "lng": 12.3562
+      },
+      "image": "images/santa-maria-san-donato-murano.webp",
+      "imageThumb": "images/thumbs/santa-maria-san-donato-murano.webp",
+      "pl": {
+        "name": "Santa Maria e San Donato na Murano",
+        "tagline": "Mozaiki i smocze kości",
+        "text": "Bazylika Santa Maria e San Donato jest jednym z najpiękniejszych zabytków Murano. Z zewnątrz zachwyca arkadami i ceglaną absydą, a w środku czeka spokojna przestrzeń z mozaikową posadzką, która przypomina kamienny dywan.\n\nKościół ma też opowieść idealną dla dzieci. Za ołtarzem pokazywane są wielkie kości, które tradycja łączyła ze smokiem pokonanym przez świętego Donata. Dziś brzmi to bardziej jak legenda niż nauka, ale właśnie takie historie sprawiały, że średniowieczne kościoły były pełne wyobraźni.\n\nMurano jest znane ze szkła, ale ta bazylika przypomina, że wyspa miała także długą historię religijną i artystyczną. Warto wejść tu po spacerze między sklepami, aby zobaczyć starsze, cichsze oblicze wyspy.",
+        "audio": "audio/pl/santa-maria-san-donato-murano.mp3",
+        "audioDuration": 51
+      },
+      "en": {
+        "name": "Basilica di Santa Maria e San Donato, Murano",
+        "tagline": "Mosaics and Dragon Bones",
+        "text": "The Basilica of Santa Maria e San Donato is one of Murano's most beautiful historic sites. Outside, its arcades and brick apse are striking. Inside is a calm space with a mosaic floor that feels like a stone carpet.\n\nThe church also has a story perfect for children. Behind the altar are large bones traditionally linked with a dragon defeated by St Donatus. Today that sounds more like legend than science, but such stories helped make medieval churches places of imagination.\n\nMurano is famous for glass, but this basilica reminds you that the island also has a long religious and artistic history. It is worth stepping inside after the shop-lined canals to see an older, quieter face of Murano.",
+        "audio": "audio/en/santa-maria-san-donato-murano.mp3",
+        "audioDuration": 49
+      }
+    },
+    {
+      "id": "burano-colored-houses",
+      "order": 26,
+      "coords": {
+        "lat": 45.4855,
+        "lng": 12.4169
+      },
+      "image": "images/burano-colored-houses.webp",
+      "imageThumb": "images/thumbs/burano-colored-houses.webp",
+      "pl": {
+        "name": "Burano: kolorowe domy i Piazza Galuppi",
+        "tagline": "Wyspa koloru",
+        "text": "Burano wygląda, jakby ktoś pomalował wyspę najodważniejszymi kolorami z pudełka. Domy są różowe, zielone, niebieskie, żółte i czerwone, a odbicia w kanałach dodają im drugie życie. Tradycyjnie mówi się, że kolory pomagały rybakom rozpoznać dom we mgle.\n\nCentrum wyspy stanowi Piazza Galuppi, nazwana od kompozytora Baldassare Galuppiego. Wokół placu znajdziecie sklepy, kawiarnie i ślad dawnego rzemiosła koronkarskiego. W oddali widać lekko przechyloną dzwonnicę kościoła San Martino.\n\nNajlepiej odejść kilka ulic od głównego tłumu. Burano szybko staje się spokojniejsze, bardziej domowe. Pamiętajcie, że te kolorowe fasady to nie tylko tło do zdjęć, ale czyjeś mieszkania. Najładniejsza pamiątka z Burano to spokojny spacer i uważne patrzenie.",
+        "audio": "audio/pl/burano-colored-houses.mp3",
+        "audioDuration": 53
+      },
+      "en": {
+        "name": "Burano: Colored Houses and Piazza Galuppi",
+        "tagline": "The Island of Colour",
+        "text": "Burano looks as if someone painted the island with the brightest colours in the box. Houses are pink, green, blue, yellow, and red, and their reflections in the canals give them a second life. Tradition says the colours helped fishermen recognize home through lagoon fog.\n\nThe centre is Piazza Galuppi, named after the composer Baldassare Galuppi. Around the square you find shops, cafes, and traces of the island's lace-making tradition. In the distance, the bell tower of San Martino leans slightly.\n\nThe best thing is to walk a few streets away from the main crowd. Burano quickly becomes quieter and more domestic. Remember that these colourful facades are not just photo backgrounds, but people's homes. The best souvenir from Burano is a slow walk and careful looking.",
+        "audio": "audio/en/burano-colored-houses.mp3",
+        "audioDuration": 51
+      }
+    },
+    {
+      "id": "burano-lace-museum",
+      "order": 27,
+      "coords": {
+        "lat": 45.4853,
+        "lng": 12.4176
+      },
+      "image": "images/burano-lace-museum.webp",
+      "imageThumb": "images/thumbs/burano-lace-museum.webp",
+      "pl": {
+        "name": "Muzeum Koronki na Burano",
+        "tagline": "Cierpliwość zapisana nicią",
+        "text": "Burano słynie nie tylko z kolorowych domów, ale także z koronki. Muzeum Koronki mieści się przy Piazza Galuppi, w budynku związanym z dawną szkołą koronczarską. To dobre miejsce, aby zrozumieć, ile pracy kryje się w czymś tak lekkim.\n\nKoronka była luksusem, który wymagał czasu, dobrego wzroku i ogromnej cierpliwości. Delikatne wzory powstawały z nici prowadzonej ręką, bez pośpiechu. W muzeum widać, jak rzemiosło łączyło sztukę, modę i ekonomię wyspy.\n\nDla dzieci może to być lekcja uważności: jeden mały błąd potrafi zepsuć wiele godzin pracy. Dla dorosłych to opowieść o kobietach i domowym rzemiośle, które stało się sławne daleko poza laguną. Po wizycie inaczej patrzy się na słowo ręcznie robione.",
+        "audio": "audio/pl/burano-lace-museum.mp3",
+        "audioDuration": 52
+      },
+      "en": {
+        "name": "Burano Lace Museum",
+        "tagline": "Patience Written in Thread",
+        "text": "Burano is famous not only for colourful houses, but also for lace. The Lace Museum stands on Piazza Galuppi, in a building connected with the old lace school. It is a good place to understand how much work can hide inside something so light.\n\nLace was a luxury that required time, sharp eyes, and extraordinary patience. Delicate patterns were made by hand, thread by thread, without hurry. In the museum you see how craft connected art, fashion, and the island's economy.\n\nFor children, it can be a lesson in attention: one small mistake could spoil many hours of work. For adults, it is a story about women and domestic skill becoming famous far beyond the lagoon. After visiting, the phrase handmade feels much more serious.",
+        "audio": "audio/en/burano-lace-museum.mp3",
+        "audioDuration": 52
+      }
+    },
+    {
+      "id": "torcello-basilica",
+      "order": 28,
+      "coords": {
+        "lat": 45.4989,
+        "lng": 12.4188
+      },
+      "image": "images/torcello-basilica.webp",
+      "imageThumb": "images/thumbs/torcello-basilica.webp",
+      "pl": {
+        "name": "Torcello: Bazylika Santa Maria Assunta",
+        "tagline": "Początek przed Wenecją",
+        "text": "Torcello jest dziś ciche i prawie puste, ale kiedyś było jednym z najważniejszych miejsc laguny. Zanim Wenecja stała się potęgą, to tutaj rozwijała się osada, biskupstwo i życie handlowe. Wyspa pomaga wyobrazić sobie początki miasta przed wielką sławą.\n\nNajcenniejszym zabytkiem jest Bazylika Santa Maria Assunta. W środku znajdują się niezwykłe mozaiki, w tym przedstawienie Sądu Ostatecznego. Złoto i ciemne figury robią silne wrażenie, szczególnie po spokojnym spacerze przez zieloną wyspę.\n\nTorcello uczy, że historia nie zawsze zostaje tam, gdzie zaczęła się najwcześniej. Bagna, choroby i zmiany handlowe sprawiły, że znaczenie wyspy zmalało. Dziś jej cisza jest częścią uroku. To miejsce dla tych, którzy chcą usłyszeć starszy, wolniejszy głos laguny.",
+        "audio": "audio/pl/torcello-basilica.mp3",
+        "audioDuration": 55
+      },
+      "en": {
+        "name": "Torcello: Basilica di Santa Maria Assunta",
+        "tagline": "The Beginning Before Venice",
+        "text": "Torcello is quiet and almost empty today, but it was once one of the most important places in the lagoon. Before Venice became powerful, this island had a settlement, a bishopric, and commercial life. It helps you imagine the city's beginnings before its great fame.\n\nThe greatest treasure is the Basilica of Santa Maria Assunta. Inside are extraordinary mosaics, including a Last Judgment. Gold and dark figures make a strong impression, especially after the calm walk across the green island.\n\nTorcello teaches that history does not always remain where it began. Marshes, disease, and changing trade routes reduced the island's importance. Today its silence is part of its charm. This is a place for anyone who wants to hear an older, slower voice of the lagoon.",
+        "audio": "audio/en/torcello-basilica.mp3",
+        "audioDuration": 54
+      }
+    },
+    {
+      "id": "mazzorbo-venissa",
+      "order": 29,
+      "coords": {
+        "lat": 45.4869,
+        "lng": 12.4089
+      },
+      "image": "images/mazzorbo-venissa.webp",
+      "imageThumb": "images/thumbs/mazzorbo-venissa.webp",
+      "pl": {
+        "name": "Mazzorbo i winnica Venissa",
+        "tagline": "Zielona przerwa w lagunie",
+        "text": "Mazzorbo leży tuż obok Burano i łączy się z nim mostem, ale nastrój jest zupełnie inny. Zamiast kolorowego gwaru znajdziecie tu ciszę, ogrody, murki, wodę i więcej przestrzeni. To dobra przerwa po tłumach.\n\nNajbardziej znanym miejscem jest Venissa, winnica związana z odrodzeniem lokalnej odmiany winogron dorona. Uprawa winorośli w lagunie brzmi zaskakująco, ale Wenecja zawsze korzystała z małych wysp jako ogrodów, sadów i zaplecza żywnościowego.\n\nSpacer po Mazzorbo pokazuje, że laguna to nie tylko pałace i kościoły. To także ziemia, sól, wiatr i praca ludzi, którzy próbują uprawiać rośliny w trudnym środowisku. Najlepiej potraktować tę wyspę jako oddech: kilka wolnych kroków pomiędzy wodą a zielenią.",
+        "audio": "audio/pl/mazzorbo-venissa.mp3",
+        "audioDuration": 52
+      },
+      "en": {
+        "name": "Mazzorbo and Venissa Vineyard",
+        "tagline": "A Green Pause in the Lagoon",
+        "text": "Mazzorbo lies beside Burano and is connected to it by a bridge, but the mood is completely different. Instead of colourful bustle, you find quiet, gardens, walls, water, and more open space. It is a good pause after crowds.\n\nThe best-known place is Venissa, a vineyard connected with the revival of the local dorona grape. Growing vines in the lagoon may sound surprising, but Venice always used smaller islands as gardens, orchards, and food-producing land.\n\nA walk on Mazzorbo shows that the lagoon is not only palaces and churches. It is also soil, salt, wind, and the work of people trying to cultivate plants in a difficult environment. Treat the island as a breath: a few slow steps between water and green.",
+        "audio": "audio/en/mazzorbo-venissa.mp3",
+        "audioDuration": 52
+      }
+    },
+    {
+      "id": "lido-di-venezia",
+      "order": 30,
+      "coords": {
+        "lat": 45.4168,
+        "lng": 12.3675
+      },
+      "image": "images/lido-di-venezia.webp",
+      "imageThumb": "images/thumbs/lido-di-venezia.webp",
+      "pl": {
+        "name": "Lido di Venezia",
+        "tagline": "Plaża, kino i bariera laguny",
+        "text": "Lido di Venezia jest długą, wąską wyspą oddzielającą lagunę od Adriatyku. Po stronie laguny przypływają vaporetto, a po drugiej stronie czeka prawdziwa plaża. Po ciasnych ulicach Wenecji sama obecność rowerów, samochodów i szerokich alei może wydać się zaskakująca.\n\nLido zasłynęło jako elegancki kurort przełomu XIX i XX wieku. Powstały tu hotele, kąpieliska i wille, a później także Festiwal Filmowy w Wenecji. To miejsce łączy wakacyjny luz z odrobiną dawnego blasku gwiazd.\n\nDla rodziny Lido może być dniem odpoczynku: spacer, lody, piasek, morze. Jednocześnie wyspa pomaga zrozumieć geografię laguny. Bez takich barier Wenecja nie byłaby chroniona w ten sam sposób. Lido jest więc nie tylko plażą, ale częścią systemu, który stworzył miasto.",
+        "audio": "audio/pl/lido-di-venezia.mp3",
+        "audioDuration": 56
+      },
+      "en": {
+        "name": "Lido di Venezia",
+        "tagline": "Beach, Cinema, and the Lagoon Barrier",
+        "text": "The Lido is a long, narrow island separating the lagoon from the Adriatic Sea. Vaporetti arrive on the lagoon side, while a real beach waits on the other side. After Venice's tight alleys, the presence of bicycles, cars, and broad avenues can feel surprising.\n\nThe Lido became famous as an elegant resort in the late nineteenth and early twentieth centuries. Hotels, bathing establishments, villas, and later the Venice Film Festival gave it a mix of holiday ease and old star glamour.\n\nFor a family, the Lido can be a rest day: walking, ice cream, sand, and sea. At the same time, the island helps explain the geography of the lagoon. Without barrier islands like this, Venice would not be protected in the same way. The Lido is not only a beach, but part of the system that made the city possible.",
+        "audio": "audio/en/lido-di-venezia.mp3",
+        "audioDuration": 53
+      }
+    }
+  ]
+}

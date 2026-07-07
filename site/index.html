@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Venice Virtual Guide</title>
+<meta name="description" content="Offline family travel guide to Venice.">
+<meta name="theme-color" content="#8a4a6b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.svg">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="download-screen" class="download-screen" hidden>
+  <div class="download-card">
+    <h1>Venice Virtual Guide</h1>
+    <p id="download-status">Downloading guide for offline use…</p>
+    <div class="progress-bar"><div id="download-progress-fill" class="progress-bar__fill"></div></div>
+    <p id="download-count" class="download-count">0 / 0 files</p>
+    <button id="download-skip" class="btn btn--ghost" type="button">Continue without waiting</button>
+  </div>
+</div>
+
+<header class="app-header">
+  <a class="app-header__title" href="#/">Venice Guide</a>
+  <div class="app-header__controls">
+    <span id="offline-status" class="offline-status" title="Offline readiness"></span>
+    <button id="sort-nearest" class="sort-nearest" type="button" aria-pressed="false">Nearest</button>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" class="lang-toggle__btn" data-lang="pl" aria-pressed="false">PL</button>
+      <button type="button" class="lang-toggle__btn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<nav class="view-switch" aria-label="View mode">
+  <button id="view-list" class="view-switch__btn" type="button" aria-pressed="true">List</button>
+  <button id="view-map" class="view-switch__btn" type="button" aria-pressed="false">Map</button>
+</nav>
+
+<main id="app" class="app-main" aria-live="polite"></main>
+
+<template id="tpl-list">
+  <ul class="place-list"></ul>
+</template>
+
+<template id="tpl-map">
+  <section class="map-view">
+    <div id="map-canvas" class="map-canvas" aria-label="Map of Venice places"></div>
+    <p id="map-status" class="map-status"></p>
+  </section>
+</template>
+
+<template id="tpl-list-item">
+  <li class="place-card">
+    <a class="place-card__link" href="#">
+      <img class="place-card__thumb" alt="" loading="lazy">
+      <div class="place-card__body">
+        <h2 class="place-card__name"></h2>
+        <p class="place-card__tagline"></p>
+        <p class="place-card__duration"></p>
+      </div>
+    </a>
+  </li>
+</template>
+
+<template id="tpl-detail">
+  <article class="place-detail">
+    <a class="back-link" href="#/">&larr; <span data-i18n="back">Back</span></a>
+    <div class="place-detail__hero">
+      <img class="place-detail__image" alt="">
+      <div class="place-detail__scrim">
+        <h2 class="place-detail__name"></h2>
+        <p class="place-detail__tagline"></p>
+      </div>
+    </div>
+    <div class="audio-player" data-state="idle">
+      <button type="button" class="audio-player__toggle" aria-label="Play">
+        <svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      </button>
+      <span class="audio-player__time audio-player__time--current">0:00</span>
+      <input class="audio-player__seek" type="range" min="0" max="100" value="0" step="1" aria-label="Seek">
+      <span class="audio-player__time audio-player__time--duration">0:00</span>
+      <p class="audio-player__error" hidden>Audio unavailable offline.</p>
+    </div>
+    <p class="place-detail__text"></p>
+    <a class="maps-link" target="_blank" rel="noopener">Open in Google Maps</a>
+  </article>
+</template>
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
+<script src="js/player.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

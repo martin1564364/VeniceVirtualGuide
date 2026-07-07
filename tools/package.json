@@ -1,0 +1,17 @@
+{
+  "name": "venice-guide-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build-time content pipeline for Venice Virtual Guide (not deployed).",
+  "scripts": {
+    "fetch-images": "node fetch-commons-images.mjs",
+    "generate-audio": "node generate-audio.mjs",
+    "optimize-images": "node optimize-images.mjs",
+    "build-manifest": "node build-manifest.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5",
+    "music-metadata": "^10.6.4"
+  }
+}
