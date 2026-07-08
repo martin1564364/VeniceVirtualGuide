@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_SHELL_VERSION = "2026-07-07-12";
+const APP_SHELL_VERSION = "2026-07-08-3";
 const CACHE_PREFIX = "venice-guide-v";
 const META_CACHE = CACHE_PREFIX + "meta";
 const ACTIVE_CACHE_KEY = "active-cache";
@@ -33,8 +33,8 @@ async function broadcast(message) {
   for (const client of clients) client.postMessage(message);
 }
 
-function cacheNameForVersion(placesVersion) {
-  return CACHE_PREFIX + APP_SHELL_VERSION + "-" + placesVersion;
+function cacheNameForVersion(placesVersion, routesVersion) {
+  return CACHE_PREFIX + APP_SHELL_VERSION + "-" + placesVersion + "-" + routesVersion;
 }
 
 async function getActiveCacheName() {
@@ -86,10 +86,16 @@ async function precacheAll(cacheName, assets) {
   return failed;
 }
 
-async function installCacheFromPlaces(placesData) {
-  const cacheName = cacheNameForVersion(placesData.version);
+async function fetchRoutesData() {
+  const routesRes = await fetch("routes.json", { cache: "no-cache" });
+  return routesRes.json();
+}
+
+async function installCacheFromContent(placesData, routesData) {
+  const cacheName = cacheNameForVersion(placesData.version, routesData.version);
   const assets = deriveAssetList(placesData);
   assets.push("places.json");
+  assets.push("routes.json");
   const failed = await precacheAll(cacheName, assets);
   if (failed.length > 0) {
     await caches.delete(cacheName);
@@ -101,10 +107,11 @@ async function installCacheFromPlaces(placesData) {
 
 async function updateCacheIfNeeded(placesResponse) {
   const placesData = await placesResponse.clone().json();
-  const cacheName = cacheNameForVersion(placesData.version);
+  const routesData = await fetchRoutesData();
+  const cacheName = cacheNameForVersion(placesData.version, routesData.version);
   const activeCacheName = await getActiveCacheName();
   if (activeCacheName !== cacheName) {
-    await installCacheFromPlaces(placesData);
+    await installCacheFromContent(placesData, routesData);
     await deleteOldCaches(cacheName);
   }
 }
@@ -123,7 +130,8 @@ self.addEventListener("install", (event) => {
     (async () => {
       const placesRes = await fetch("places.json", { cache: "no-cache" });
       const placesData = await placesRes.json();
-      await installCacheFromPlaces(placesData);
+      const routesData = await fetchRoutesData();
+      await installCacheFromContent(placesData, routesData);
       self.skipWaiting();
     })()
   );
@@ -144,12 +152,12 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
 
   const url = new URL(req.url);
-  if (url.pathname.endsWith("/places.json")) {
-    // Network-first for the manifest so version bumps are detected promptly.
+  if (url.pathname.endsWith("/places.json") || url.pathname.endsWith("/routes.json")) {
+    // Network-first for content manifests so version bumps are detected promptly.
     event.respondWith(
       fetch(req)
         .then((res) => {
-          if (res.ok) {
+          if (res.ok && url.pathname.endsWith("/places.json")) {
             updateCacheIfNeeded(res.clone()).catch((err) => {
               console.error("Service worker content update failed", err);
             });
@@ -168,6 +176,10 @@ self.addEventListener("fetch", (event) => {
 
 self.addEventListener("message", (event) => {
   const msg = event.data || {};
+  if (msg.type === "skip-waiting") {
+    event.waitUntil(self.skipWaiting());
+    return;
+  }
   if (msg.type !== "get-cache-status") return;
 
   event.waitUntil(

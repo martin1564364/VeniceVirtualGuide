@@ -42,6 +42,7 @@
 
 <nav class="view-switch" aria-label="View mode">
   <button id="view-list" class="view-switch__btn" type="button" aria-pressed="true">List</button>
+  <button id="view-routes" class="view-switch__btn" type="button" aria-pressed="false">Routes</button>
   <button id="view-map" class="view-switch__btn" type="button" aria-pressed="false">Map</button>
 </nav>
 
@@ -56,6 +57,42 @@
     <div id="map-canvas" class="map-canvas" aria-label="Map of Venice places"></div>
     <p id="map-status" class="map-status"></p>
   </section>
+</template>
+
+<template id="tpl-routes">
+  <section class="routes-view">
+    <div class="section-intro">
+      <h1 class="section-intro__title"></h1>
+      <p class="section-intro__text"></p>
+    </div>
+    <ul class="route-list"></ul>
+  </section>
+</template>
+
+<template id="tpl-route-card">
+  <li class="route-card">
+    <a class="route-card__link" href="#">
+      <div class="route-card__eyebrow"></div>
+      <h2 class="route-card__name"></h2>
+      <p class="route-card__summary"></p>
+      <p class="route-card__meta"></p>
+    </a>
+  </li>
+</template>
+
+<template id="tpl-route-detail">
+  <article class="route-detail">
+    <a class="back-link" href="#/routes">&larr; <span data-i18n="back">Back</span></a>
+    <header class="route-detail__header">
+      <p class="route-detail__eyebrow"></p>
+      <h1 class="route-detail__name"></h1>
+      <p class="route-detail__summary"></p>
+      <div class="route-detail__meta"></div>
+      <a class="route-map-link" href="#">View on map</a>
+    </header>
+    <section class="route-notes"></section>
+    <ol class="route-timeline"></ol>
+  </article>
 </template>
 
 <template id="tpl-list-item">

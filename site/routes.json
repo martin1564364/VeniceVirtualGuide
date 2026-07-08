@@ -1,0 +1,596 @@
+{
+  "version": "2026-07-08-2",
+  "base": {
+    "address": "Via Hermada 44, 30013 Cavallino-Treporti",
+    "transportHub": "Punta Sabbioni / Treporti",
+    "notes": [
+      {
+        "pl": "Godziny rejsów sprawdź dzień wcześniej w oficjalnym rozkładzie ACTV. W lipcu planuj zapas na kolejki, upał i powrót.",
+        "en": "Check ACTV departures the day before travel. In July, leave buffer time for queues, heat, and the return trip."
+      },
+      {
+        "pl": "Trasy zakładają start i powrót do mieszkania przy Via Hermada 44 oraz dojazd lądowy do Punta Sabbioni lub Treporti.",
+        "en": "Routes assume start and finish at Via Hermada 44 with a local transfer to Punta Sabbioni or Treporti."
+      }
+    ]
+  },
+  "routes": [
+    {
+      "id": "day-1-classic-short",
+      "day": "2026-07-13",
+      "variant": "short",
+      "durationHours": 6,
+      "walkingKm": 3.2,
+      "transitLines": [
+        "ACTV 14",
+        "ACTV 15"
+      ],
+      "pl": {
+        "name": "Dzień 1: San Marco spokojnie",
+        "summary": "Najważniejsze symbole Wenecji bez forsowania tempa. Dobra wersja na upalny dzień lub późniejszy start.",
+        "intensity": "Lekka",
+        "notes": [
+          "Najlepiej zacząć wcześnie rano, zanim okolice San Marco zrobią się najgęstsze.",
+          "Jeżeli chcesz wejść do Bazyliki lub Pałacu Dożów, zarezerwuj bilety online."
+        ]
+      },
+      "en": {
+        "name": "Day 1: Easy San Marco",
+        "summary": "The essential Venice landmarks without pushing the pace. Good for a hot day or a later start.",
+        "intensity": "Easy",
+        "notes": [
+          "Start early if possible, before San Marco gets crowded.",
+          "Book online if you want to enter the Basilica or Doge's Palace."
+        ]
+      },
+      "steps": [
+        {
+          "kind": "transfer",
+          "time": "08:30",
+          "durationMinutes": 60,
+          "pl": "Via Hermada 44 -> Punta Sabbioni -> San Zaccaria",
+          "en": "Via Hermada 44 -> Punta Sabbioni -> San Zaccaria"
+        },
+        {
+          "kind": "place",
+          "time": "09:30",
+          "durationMinutes": 35,
+          "placeId": "st-marks-square"
+        },
+        {
+          "kind": "place",
+          "time": "10:10",
+          "durationMinutes": 60,
+          "placeId": "st-marks-basilica"
+        },
+        {
+          "kind": "place",
+          "time": "11:20",
+          "durationMinutes": 75,
+          "placeId": "doges-palace"
+        },
+        {
+          "kind": "place",
+          "time": "12:40",
+          "durationMinutes": 20,
+          "placeId": "bridge-of-sighs"
+        },
+        {
+          "kind": "break",
+          "time": "13:00",
+          "durationMinutes": 60,
+          "pl": "Lunch lub odpoczynek w cieniu bocznych uliczek Castello",
+          "en": "Lunch or shade break in the side streets of Castello"
+        },
+        {
+          "kind": "place",
+          "time": "14:10",
+          "durationMinutes": 45,
+          "placeId": "campanile-di-san-marco"
+        },
+        {
+          "kind": "transfer",
+          "time": "15:15",
+          "durationMinutes": 60,
+          "pl": "San Zaccaria -> Punta Sabbioni -> Via Hermada 44",
+          "en": "San Zaccaria -> Punta Sabbioni -> Via Hermada 44"
+        }
+      ]
+    },
+    {
+      "id": "day-1-classic-medium",
+      "day": "2026-07-13",
+      "variant": "medium",
+      "durationHours": 8,
+      "walkingKm": 5.4,
+      "transitLines": [
+        "ACTV 14",
+        "ACTV 15"
+      ],
+      "pl": {
+        "name": "Dzień 1: San Marco i Rialto",
+        "summary": "Klasyczna Wenecja: plac, bazylika, most Rialto, targ i widoki na Canal Grande.",
+        "intensity": "Średnia",
+        "notes": [
+          "To najlepszy wariant bazowy na pierwszy dzień.",
+          "Targ Rialto najlepiej oglądać przed lunchem; po południu traci sens jako targ."
+        ]
+      },
+      "en": {
+        "name": "Day 1: San Marco and Rialto",
+        "summary": "Classic Venice: the square, basilica, Rialto Bridge, market, and Grand Canal views.",
+        "intensity": "Medium",
+        "notes": [
+          "This is the best default route for day one.",
+          "Rialto Market is best before lunch; later it loses its market atmosphere."
+        ]
+      },
+      "steps": [
+        {
+          "kind": "transfer",
+          "time": "08:00",
+          "durationMinutes": 60,
+          "pl": "Via Hermada 44 -> Punta Sabbioni -> San Zaccaria",
+          "en": "Via Hermada 44 -> Punta Sabbioni -> San Zaccaria"
+        },
+        {
+          "kind": "place",
+          "time": "09:00",
+          "durationMinutes": 30,
+          "placeId": "st-marks-square"
+        },
+        {
+          "kind": "place",
+          "time": "09:35",
+          "durationMinutes": 60,
+          "placeId": "st-marks-basilica"
+        },
+        {
+          "kind": "place",
+          "time": "10:45",
+          "durationMinutes": 60,
+          "placeId": "doges-palace"
+        },
+        {
+          "kind": "place",
+          "time": "11:50",
+          "durationMinutes": 20,
+          "placeId": "bridge-of-sighs"
+        },
+        {
+          "kind": "walk",
+          "time": "12:10",
+          "durationMinutes": 35,
+          "pl": "Spacer przez Mercerie w stronę Rialto",
+          "en": "Walk through the Mercerie toward Rialto"
+        },
+        {
+          "kind": "place",
+          "time": "12:45",
+          "durationMinutes": 35,
+          "placeId": "rialto-bridge"
+        },
+        {
+          "kind": "place",
+          "time": "13:20",
+          "durationMinutes": 30,
+          "placeId": "rialto-market"
+        },
+        {
+          "kind": "break",
+          "time": "13:50",
+          "durationMinutes": 75,
+          "pl": "Lunch w San Polo lub Cannaregio",
+          "en": "Lunch in San Polo or Cannaregio"
+        },
+        {
+          "kind": "place",
+          "time": "15:10",
+          "durationMinutes": 45,
+          "placeId": "grand-canal"
+        },
+        {
+          "kind": "place",
+          "time": "16:05",
+          "durationMinutes": 35,
+          "placeId": "teatro-la-fenice"
+        },
+        {
+          "kind": "transfer",
+          "time": "17:15",
+          "durationMinutes": 60,
+          "pl": "Powrót z San Marco/San Zaccaria do Punta Sabbioni",
+          "en": "Return from San Marco/San Zaccaria to Punta Sabbioni"
+        }
+      ]
+    },
+    {
+      "id": "day-1-classic-full",
+      "day": "2026-07-13",
+      "variant": "full",
+      "durationHours": 10,
+      "walkingKm": 8.2,
+      "transitLines": [
+        "ACTV 14",
+        "ACTV 15"
+      ],
+      "pl": {
+        "name": "Dzień 1: San Marco, Rialto i Dorsoduro",
+        "summary": "Pełny dzień dla ambitnych: klasyka miasta, sztuka, kościoły i wieczorne światło nad laguną.",
+        "intensity": "Wysoka",
+        "notes": [
+          "W lipcu traktuj Dorsoduro jako opcję po odpoczynku i obiedzie.",
+          "Jeżeli robi się za gorąco, zakończ trasę po Rialto i wróć do San Zaccaria."
+        ]
+      },
+      "en": {
+        "name": "Day 1: San Marco, Rialto, and Dorsoduro",
+        "summary": "A full ambitious day: city icons, art, churches, and evening light over the lagoon.",
+        "intensity": "High",
+        "notes": [
+          "In July, treat Dorsoduro as an option after a proper rest and lunch.",
+          "If the heat becomes too much, end after Rialto and return to San Zaccaria."
+        ]
+      },
+      "steps": [
+        {
+          "kind": "transfer",
+          "time": "07:45",
+          "durationMinutes": 60,
+          "pl": "Via Hermada 44 -> Punta Sabbioni -> San Zaccaria",
+          "en": "Via Hermada 44 -> Punta Sabbioni -> San Zaccaria"
+        },
+        {
+          "kind": "place",
+          "time": "08:45",
+          "durationMinutes": 25,
+          "placeId": "st-marks-square"
+        },
+        {
+          "kind": "place",
+          "time": "09:15",
+          "durationMinutes": 55,
+          "placeId": "st-marks-basilica"
+        },
+        {
+          "kind": "place",
+          "time": "10:20",
+          "durationMinutes": 70,
+          "placeId": "doges-palace"
+        },
+        {
+          "kind": "place",
+          "time": "11:35",
+          "durationMinutes": 25,
+          "placeId": "bridge-of-sighs"
+        },
+        {
+          "kind": "place",
+          "time": "12:25",
+          "durationMinutes": 35,
+          "placeId": "rialto-bridge"
+        },
+        {
+          "kind": "place",
+          "time": "13:00",
+          "durationMinutes": 25,
+          "placeId": "rialto-market"
+        },
+        {
+          "kind": "break",
+          "time": "13:30",
+          "durationMinutes": 90,
+          "pl": "Długi lunch i przerwa w cieniu",
+          "en": "Long lunch and shade break"
+        },
+        {
+          "kind": "place",
+          "time": "15:15",
+          "durationMinutes": 45,
+          "placeId": "frari-basilica"
+        },
+        {
+          "kind": "place",
+          "time": "16:05",
+          "durationMinutes": 45,
+          "placeId": "scuola-grande-di-san-rocco"
+        },
+        {
+          "kind": "place",
+          "time": "17:10",
+          "durationMinutes": 45,
+          "placeId": "gallerie-accademia"
+        },
+        {
+          "kind": "place",
+          "time": "18:05",
+          "durationMinutes": 35,
+          "placeId": "santa-maria-della-salute"
+        },
+        {
+          "kind": "transfer",
+          "time": "19:00",
+          "durationMinutes": 60,
+          "pl": "Powrót do San Zaccaria i dalej do Punta Sabbioni",
+          "en": "Return to San Zaccaria, then Punta Sabbioni"
+        }
+      ]
+    },
+    {
+      "id": "day-2-islands-short",
+      "day": "2026-07-14",
+      "variant": "short",
+      "durationHours": 6,
+      "walkingKm": 3,
+      "transitLines": [
+        "ACTV 12",
+        "ACTV 14 seasonal"
+      ],
+      "pl": {
+        "name": "Dzień 2: Burano i Mazzorbo spokojnie",
+        "summary": "Kolorowe Burano, krótki spacer na Mazzorbo i prosty powrót bez wciskania zbyt wielu wysp.",
+        "intensity": "Lekka",
+        "notes": [
+          "Dobry wariant, jeśli po pierwszym dniu potrzebujesz krótszego planu.",
+          "Burano jest najprzyjemniejsze rano lub późnym popołudniem."
+        ]
+      },
+      "en": {
+        "name": "Day 2: Easy Burano and Mazzorbo",
+        "summary": "Colorful Burano, a short walk to Mazzorbo, and a simple return without packing in too many islands.",
+        "intensity": "Easy",
+        "notes": [
+          "Good if you want a lighter plan after day one.",
+          "Burano is best in the morning or late afternoon."
+        ]
+      },
+      "steps": [
+        {
+          "kind": "transfer",
+          "time": "09:00",
+          "durationMinutes": 45,
+          "pl": "Via Hermada 44 -> Treporti/Punta Sabbioni -> Burano",
+          "en": "Via Hermada 44 -> Treporti/Punta Sabbioni -> Burano"
+        },
+        {
+          "kind": "place",
+          "time": "09:50",
+          "durationMinutes": 90,
+          "placeId": "burano-colored-houses"
+        },
+        {
+          "kind": "place",
+          "time": "11:30",
+          "durationMinutes": 40,
+          "placeId": "burano-lace-museum"
+        },
+        {
+          "kind": "break",
+          "time": "12:15",
+          "durationMinutes": 75,
+          "pl": "Lunch na Burano",
+          "en": "Lunch on Burano"
+        },
+        {
+          "kind": "place",
+          "time": "13:40",
+          "durationMinutes": 60,
+          "placeId": "mazzorbo-venissa"
+        },
+        {
+          "kind": "transfer",
+          "time": "15:00",
+          "durationMinutes": 45,
+          "pl": "Powrót do Treporti/Punta Sabbioni i Via Hermada 44",
+          "en": "Return to Treporti/Punta Sabbioni and Via Hermada 44"
+        }
+      ]
+    },
+    {
+      "id": "day-2-islands-medium",
+      "day": "2026-07-14",
+      "variant": "medium",
+      "durationHours": 9,
+      "walkingKm": 5.8,
+      "transitLines": [
+        "ACTV 12",
+        "ACTV 14 seasonal"
+      ],
+      "pl": {
+        "name": "Dzień 2: Burano, Torcello i Murano",
+        "summary": "Najlepszy wariant wyspiarski: kolory Burano, cisza Torcello i szkło Murano.",
+        "intensity": "Średnia",
+        "notes": [
+          "Sprawdź dokładnie połączenia Burano-Torcello-Murano, bo czekanie potrafi zjeść dzień.",
+          "Jeżeli masz wybrać tylko jedno wnętrze, wybierz bazylikę na Torcello albo Muzeum Szkła."
+        ]
+      },
+      "en": {
+        "name": "Day 2: Burano, Torcello, and Murano",
+        "summary": "The best island route: Burano colors, Torcello calm, and Murano glass.",
+        "intensity": "Medium",
+        "notes": [
+          "Check Burano-Torcello-Murano connections carefully; waiting time can consume the day.",
+          "If you choose only one interior, pick Torcello Basilica or the Glass Museum."
+        ]
+      },
+      "steps": [
+        {
+          "kind": "transfer",
+          "time": "08:30",
+          "durationMinutes": 45,
+          "pl": "Via Hermada 44 -> Treporti/Punta Sabbioni -> Burano",
+          "en": "Via Hermada 44 -> Treporti/Punta Sabbioni -> Burano"
+        },
+        {
+          "kind": "place",
+          "time": "09:20",
+          "durationMinutes": 75,
+          "placeId": "burano-colored-houses"
+        },
+        {
+          "kind": "transfer",
+          "time": "10:40",
+          "durationMinutes": 20,
+          "pl": "Burano -> Torcello",
+          "en": "Burano -> Torcello"
+        },
+        {
+          "kind": "place",
+          "time": "11:05",
+          "durationMinutes": 75,
+          "placeId": "torcello-basilica"
+        },
+        {
+          "kind": "break",
+          "time": "12:30",
+          "durationMinutes": 75,
+          "pl": "Lunch na Burano lub Torcello",
+          "en": "Lunch on Burano or Torcello"
+        },
+        {
+          "kind": "place",
+          "time": "13:55",
+          "durationMinutes": 45,
+          "placeId": "mazzorbo-venissa"
+        },
+        {
+          "kind": "transfer",
+          "time": "14:50",
+          "durationMinutes": 45,
+          "pl": "Burano/Mazzorbo -> Murano",
+          "en": "Burano/Mazzorbo -> Murano"
+        },
+        {
+          "kind": "place",
+          "time": "15:40",
+          "durationMinutes": 60,
+          "placeId": "murano-glass-museum"
+        },
+        {
+          "kind": "place",
+          "time": "16:50",
+          "durationMinutes": 35,
+          "placeId": "santa-maria-san-donato-murano"
+        },
+        {
+          "kind": "transfer",
+          "time": "17:45",
+          "durationMinutes": 75,
+          "pl": "Murano -> Fondamente Nove/Punta Sabbioni lub powrót przez Burano według rozkładu",
+          "en": "Murano -> Fondamente Nove/Punta Sabbioni or return via Burano depending on timetable"
+        }
+      ]
+    },
+    {
+      "id": "day-2-islands-full",
+      "day": "2026-07-14",
+      "variant": "full",
+      "durationHours": 11,
+      "walkingKm": 8,
+      "transitLines": [
+        "ACTV 12",
+        "ACTV 22",
+        "ACTV 14",
+        "ACTV 15"
+      ],
+      "pl": {
+        "name": "Dzień 2: Wyspy i Cannaregio",
+        "summary": "Długi dzień: północna laguna, Murano i wieczorne wejście do mniej zatłoczonej Wenecji.",
+        "intensity": "Wysoka",
+        "notes": [
+          "To wariant tylko przy dobrym samopoczuciu i sprawnych połączeniach.",
+          "Jeżeli opóźnią się vaporetto, odpuść Cannaregio i wracaj bezpośrednio."
+        ]
+      },
+      "en": {
+        "name": "Day 2: Islands and Cannaregio",
+        "summary": "A long day: northern lagoon islands, Murano, and an evening entry into quieter Venice.",
+        "intensity": "High",
+        "notes": [
+          "Use this only if you feel good and the connections work well.",
+          "If the waterbuses run late, skip Cannaregio and return directly."
+        ]
+      },
+      "steps": [
+        {
+          "kind": "transfer",
+          "time": "08:00",
+          "durationMinutes": 45,
+          "pl": "Via Hermada 44 -> Treporti/Punta Sabbioni -> Burano",
+          "en": "Via Hermada 44 -> Treporti/Punta Sabbioni -> Burano"
+        },
+        {
+          "kind": "place",
+          "time": "08:50",
+          "durationMinutes": 70,
+          "placeId": "burano-colored-houses"
+        },
+        {
+          "kind": "place",
+          "time": "10:15",
+          "durationMinutes": 70,
+          "placeId": "torcello-basilica"
+        },
+        {
+          "kind": "break",
+          "time": "11:45",
+          "durationMinutes": 75,
+          "pl": "Lunch i odpoczynek na Burano",
+          "en": "Lunch and rest on Burano"
+        },
+        {
+          "kind": "place",
+          "time": "13:10",
+          "durationMinutes": 45,
+          "placeId": "mazzorbo-venissa"
+        },
+        {
+          "kind": "transfer",
+          "time": "14:05",
+          "durationMinutes": 45,
+          "pl": "Burano/Mazzorbo -> Murano",
+          "en": "Burano/Mazzorbo -> Murano"
+        },
+        {
+          "kind": "place",
+          "time": "14:55",
+          "durationMinutes": 60,
+          "placeId": "murano-glass-museum"
+        },
+        {
+          "kind": "place",
+          "time": "16:05",
+          "durationMinutes": 35,
+          "placeId": "santa-maria-san-donato-murano"
+        },
+        {
+          "kind": "transfer",
+          "time": "16:50",
+          "durationMinutes": 25,
+          "pl": "Murano -> Fondamente Nove",
+          "en": "Murano -> Fondamente Nove"
+        },
+        {
+          "kind": "place",
+          "time": "17:25",
+          "durationMinutes": 60,
+          "placeId": "jewish-ghetto-cannaregio"
+        },
+        {
+          "kind": "place",
+          "time": "18:35",
+          "durationMinutes": 35,
+          "placeId": "ca-doro"
+        },
+        {
+          "kind": "transfer",
+          "time": "19:30",
+          "durationMinutes": 75,
+          "pl": "Powrót do Punta Sabbioni/Treporti według aktualnego rozkładu",
+          "en": "Return to Punta Sabbioni/Treporti using the current timetable"
+        }
+      ]
+    }
+  ]
+}

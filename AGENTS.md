@@ -13,6 +13,20 @@ npx serve site
 python -m http.server --directory site 8080
 ```
 
+Known-good local startup for this Windows checkout: use the repo's Node dev server and, when starting it from Codex, run it outside the sandbox so the process persists after the tool call exits.
+
+```powershell
+cmd.exe /c start "Venice Guide Server" /MIN "C:\Application Development\VeniceVirtualGuide\tools\start-dev-server.cmd"
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8080
+```
+
+Do not repeat server discovery unless this command fails. Previous attempts with `npx serve`, background `Start-Process`, and the workspace `.venv\Scripts\python.exe` were unreliable here.
+
 Install tool dependencies from `tools/` before running the content pipeline:
 
 ```sh
@@ -29,6 +43,8 @@ Use vanilla HTML, CSS, and JavaScript. JavaScript is written as ES modules or br
 ## Testing Guidelines
 
 There is no automated test suite yet. Before submitting changes, run the relevant pipeline script and manually test the app in a browser. Verify list view, place detail routing, language switching, audio unavailable states, service worker registration, and offline behavior after a completed cache. For content changes, ensure `npm run build-manifest` passes.
+
+Whenever app shell files are updated (`site/index.html`, `site/css/app.css`, `site/js/*.js`, `site/sw.js`, icons, manifest, or new static JSON/assets), bump `APP_SHELL_VERSION` in `site/sw.js` or run the relevant manifest build if content versions changed. This forces the browser/service worker cache to refresh instead of serving a stale app.
 
 ## Commit & Pull Request Guidelines
 

@@ -8,6 +8,8 @@ import path from "node:path";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SOURCE_PATH = path.join(ROOT, "content", "places.source.json");
 const OUTPUT_PATH = path.join(ROOT, "site", "places.json");
+const ROUTES_SOURCE_PATH = path.join(ROOT, "content", "routes.source.json");
+const ROUTES_OUTPUT_PATH = path.join(ROOT, "site", "routes.json");
 const SITE_DIR = path.join(ROOT, "site");
 
 const REQUIRED_LANG_FIELDS = ["name", "tagline", "text", "audio", "audioDuration"];
@@ -88,6 +90,58 @@ async function validate(data) {
   return errors;
 }
 
+function validateRoutes(routesData, placesData) {
+  const errors = [];
+  if (!routesData.version) errors.push("routes: missing top-level `version`.");
+  if (!routesData.base || typeof routesData.base.address !== "string") {
+    errors.push("routes: missing base.address.");
+  }
+  if (!Array.isArray(routesData.routes) || routesData.routes.length === 0) {
+    errors.push("routes: `routes` must be a non-empty array.");
+    return errors;
+  }
+
+  const placeIds = new Set(placesData.places.map((place) => place.id));
+  const routeIds = new Set();
+  for (const route of routesData.routes) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(route.id || "")) {
+      errors.push(`routes.${route.id || "?"}: id must be kebab-case.`);
+    }
+    if (routeIds.has(route.id)) errors.push(`routes.${route.id}: duplicate id.`);
+    routeIds.add(route.id);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(route.day || "")) {
+      errors.push(`routes.${route.id}: day must use YYYY-MM-DD.`);
+    }
+    if (!["short", "medium", "full"].includes(route.variant)) {
+      errors.push(`routes.${route.id}: variant must be short, medium, or full.`);
+    }
+    if (!(Number(route.durationHours) > 0)) {
+      errors.push(`routes.${route.id}: durationHours must be positive.`);
+    }
+    if (!Array.isArray(route.steps) || route.steps.length === 0) {
+      errors.push(`routes.${route.id}: steps must be a non-empty array.`);
+    }
+    for (const lang of ["pl", "en"]) {
+      const local = route[lang];
+      if (!local || !local.name || !local.summary || !local.intensity) {
+        errors.push(`routes.${route.id}.${lang}: missing name, summary, or intensity.`);
+      }
+    }
+    for (const step of route.steps || []) {
+      if (!["place", "transfer", "walk", "break"].includes(step.kind)) {
+        errors.push(`routes.${route.id}: unknown step kind "${step.kind}".`);
+      }
+      if (step.kind === "place" && !placeIds.has(step.placeId)) {
+        errors.push(`routes.${route.id}: unknown placeId "${step.placeId}".`);
+      }
+      if (step.kind !== "place" && (!step.pl || !step.en)) {
+        errors.push(`routes.${route.id}: ${step.kind} step missing pl/en label.`);
+      }
+    }
+  }
+  return errors;
+}
+
 function bumpVersion(currentVersion) {
   const today = new Date().toISOString().slice(0, 10);
   const match = /^(\d{4}-\d{2}-\d{2})-(\d+)$/.exec(currentVersion || "");
@@ -99,7 +153,9 @@ function bumpVersion(currentVersion) {
 
 async function main() {
   const source = JSON.parse(await readFile(SOURCE_PATH, "utf8"));
+  const routesSource = JSON.parse(await readFile(ROUTES_SOURCE_PATH, "utf8"));
   const errors = await validate(source);
+  errors.push(...validateRoutes(routesSource, source));
 
   if (errors.length > 0) {
     console.error("Validation failed:\n" + errors.map((e) => `  - ${e}`).join("\n"));
@@ -107,8 +163,11 @@ async function main() {
   }
 
   source.version = bumpVersion(source.version);
+  routesSource.version = bumpVersion(routesSource.version);
   await writeFile(OUTPUT_PATH, JSON.stringify(source, null, 2) + "\n");
+  await writeFile(ROUTES_OUTPUT_PATH, JSON.stringify(routesSource, null, 2) + "\n");
   console.log(`site/places.json written (version ${source.version}).`);
+  console.log(`site/routes.json written (version ${routesSource.version}).`);
 }
 
 main().catch((err) => {
