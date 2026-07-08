@@ -101,6 +101,18 @@
       this.errorEl.hidden = true;
     }
 
+    _clearMediaSession() {
+      if (!("mediaSession" in navigator)) return;
+      navigator.mediaSession.metadata = null;
+      navigator.mediaSession.playbackState = "none";
+      try {
+        navigator.mediaSession.setActionHandler("play", null);
+        navigator.mediaSession.setActionHandler("pause", null);
+      } catch {
+        // Some browsers reject unsupported Media Session actions.
+      }
+    }
+
     /**
      * Load a new track, stopping any track currently playing.
      * @param {{src: string, title: string, artist: string, artwork: string}} track
@@ -120,8 +132,15 @@
           artist: track.artist,
           artwork: artworkFor(track.artwork),
         });
-        navigator.mediaSession.setActionHandler("play", () => this.audio.play());
-        navigator.mediaSession.setActionHandler("pause", () => this.audio.pause());
+        navigator.mediaSession.playbackState = "paused";
+        try {
+          navigator.mediaSession.setActionHandler("play", () => {
+            this.audio.play().catch(() => this._showError());
+          });
+          navigator.mediaSession.setActionHandler("pause", () => this.audio.pause());
+        } catch {
+          // Some browsers reject unsupported Media Session actions.
+        }
       }
     }
 
@@ -129,6 +148,12 @@
       this.audio.pause();
       this.audio.removeAttribute("src");
       this.audio.load();
+      this.seek.value = "0";
+      this.seek.max = "0";
+      this.currentTimeEl.textContent = "0:00";
+      this.durationEl.textContent = "0:00";
+      this._resetError();
+      this._clearMediaSession();
     }
   }
 

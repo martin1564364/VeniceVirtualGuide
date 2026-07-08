@@ -1,39 +1,63 @@
 # Venice Virtual Guide
 
-Offline-capable PWA travel guide to Venice. See [docs/DESIGN.md](docs/DESIGN.md) for the full design.
+Offline-first PWA travel guide for Venice, built as a static site under `site/`.
 
-**Current status:** Phase 1 guide — one place (St Mark's Square) fully wired up in both languages, with optimized WebP images and generated MP3 narration.
+## Current status
+
+The runtime is in its final travel-ready shape:
+
+- 30 places with bilingual content (`pl` and `en`)
+- 6 suggested routes starting from Via Hermada 44 / Punta Sabbioni
+- generated MP3 narration committed under `site/audio/`
+- offline SVG atlas map and route maps
+- service-worker precache for full offline use after first download
+
+`docs/DESIGN.md` now serves as a mix of historical design notes and an as-built snapshot.
 
 ## Running locally
 
-The site is plain HTML/CSS/JS with no build step. Serve the `site/` folder over HTTP (service workers require a proper origin, not `file://`):
+Serve `site/` over HTTP. Do not open `site/index.html` directly because service workers require an origin.
 
-```
+```sh
 npx serve site
 ```
 
 or
 
-```
+```sh
 python -m http.server --directory site 8080
 ```
 
-Then open the printed URL (e.g. `http://localhost:3000` / `http://localhost:8080`) in a browser.
+Known-good startup for this Windows checkout:
+
+```powershell
+cmd.exe /c start "Venice Guide Server" /MIN "C:\Application Development\VeniceVirtualGuide\tools\start-dev-server.cmd"
+```
+
+Then open `http://127.0.0.1:8080`.
 
 ## Content pipeline
 
-Author content in `content/places.source.json`, then run (from `tools/`, after `npm install`):
+Install tool dependencies from `tools/`, then run the relevant pipeline scripts:
 
+```sh
+npm install
+npm run build-manifest
+npm run optimize-images
+npm run generate-audio
 ```
-node generate-audio.mjs      # requires ELEVENLABS_API_KEY in .env or the environment
-node optimize-images.mjs     # requires source photos in content/photos-src/{id}.*
-node build-manifest.mjs      # validates + writes site/places.json
-```
 
-`generate-audio.mjs` uses ElevenLabs TTS. Set `ELEVENLABS_API_KEY` in `.env` or the process environment. If the account cannot use the default voice through the API, set `ELEVENLABS_VOICE_ID` to an account-owned voice ID.
+Notes:
 
-Generated audio is committed under `site/audio/{pl,en}/`. If narration text changes, rerun `generate-audio.mjs` before `build-manifest.mjs` so `audioDuration` stays current.
+- Author source content in `content/places.source.json`.
+- `generate-audio.mjs` uses ElevenLabs and requires `ELEVENLABS_API_KEY`.
+- Generated audio is committed under `site/audio/{pl,en}/`.
+- If app shell files change, bump `APP_SHELL_VERSION` in `site/sw.js` to refresh cached clients.
 
 ## Repository structure
 
-See [docs/DESIGN.md §7](docs/DESIGN.md#7-repository-structure).
+- `site/`: deployed runtime files
+- `content/`: source place content and original photos
+- `tools/`: build and generation scripts
+- `docs/`: design notes and as-built references
+- `CREDITS.md`: image attribution tracking

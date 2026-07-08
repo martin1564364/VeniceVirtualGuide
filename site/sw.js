@@ -1,9 +1,10 @@
 "use strict";
 
-const APP_SHELL_VERSION = "2026-07-08-4";
+const APP_SHELL_VERSION = "2026-07-08-6";
 const CACHE_PREFIX = "venice-guide-v";
 const META_CACHE = CACHE_PREFIX + "meta";
 const ACTIVE_CACHE_KEY = "active-cache";
+const PRECACHE_CONCURRENCY = 5;
 const SHELL_FILES = [
   "./",
   "index.html",
@@ -60,23 +61,29 @@ async function setActiveCacheName(cacheName) {
 async function precacheAll(cacheName, assets) {
   const cache = await caches.open(cacheName);
   let done = 0;
+  let nextIndex = 0;
   const failed = [];
   await broadcast({ type: "precache-progress", cacheName, done, total: assets.length });
 
-  await Promise.all(
-    assets.map(async (url) => {
+  async function runWorker() {
+    while (nextIndex < assets.length) {
+      const url = assets[nextIndex];
+      nextIndex += 1;
       try {
         const response = await fetch(url, { cache: "no-cache" });
         if (response.ok) await cache.put(url, response);
         else failed.push(url);
-      } catch (err) {
+      } catch {
         failed.push(url);
       } finally {
         done += 1;
         await broadcast({ type: "precache-progress", cacheName, done, total: assets.length });
       }
-    })
-  );
+    }
+  }
+
+  const workerCount = Math.min(PRECACHE_CONCURRENCY, assets.length);
+  await Promise.all(Array.from({ length: workerCount }, () => runWorker()));
 
   if (failed.length > 0) {
     await broadcast({ type: "precache-incomplete", cacheName, failed, total: assets.length });

@@ -6,6 +6,7 @@
   const SUPPORTED_LANGS = ["pl", "en"];
   const VENICE_CENTER = { lat: 45.4341, lng: 12.3388 };
   const MAX_MAP_LOCATION_DISTANCE_METERS = 20000;
+  const MAP_VIEWBOX = { width: 1000, height: 720, padding: 72 };
 
   const I18N = {
     back: { pl: "Wstecz", en: "Back" },
@@ -33,13 +34,19 @@
   I18N.lines = { pl: "linie", en: "lines" };
   I18N.openStop = { pl: "Otwórz w przewodniku", en: "Open in guide" };
   I18N.viewRouteMap = { pl: "Pokaz na mapie", en: "View on map" };
-  I18N.routeMapHint = { pl: "Dotknij punktu trasy, aby otworzyc szczegoly miejsca.", en: "Tap a route stop to open place details." };
+  I18N.routeMapHint = { pl: "Dotknij punktu trasy, aby podejrzec miejsce i otworzyc przewodnik.", en: "Tap a route stop to preview the place and open the guide." };
   I18N.timeline = { pl: "Plan", en: "Timeline" };
   I18N.short = { pl: "Krótka", en: "Short" };
   I18N.medium = { pl: "Średnia", en: "Medium" };
   I18N.full = { pl: "Pełna", en: "Full" };
-  I18N.mapHint = { pl: "Dotknij pinezki, aby otworzyc szczegoly miejsca.", en: "Tap a marker to open place details." };
+  I18N.mapHint = { pl: "Dotknij pinezki, aby podejrzec miejsce i otworzyc przewodnik.", en: "Tap a marker to preview the place and open the guide." };
   I18N.mapLocationFar = { pl: "Jestes dalej niz 20 km od Wenecji, dlatego mapa pokazuje samo miasto.", en: "You are more than 20 km from Venice, so the map is centered on Venice only." };
+  I18N.mapLocationOutside = {
+    pl: "Twoja lokalizacja jest poza zakresem tej mapy offline, dlatego pokazujemy tylko miejsca z przewodnika.",
+    en: "Your location is outside this offline map area, so only guide places are shown.",
+  };
+  I18N.mapOffline = { pl: "Mapa dziala w pelni offline.", en: "This map works fully offline." };
+  I18N.youAreHere = { pl: "Jestes tutaj", en: "You are here" };
 
   const state = {
     places: null,
@@ -140,7 +147,7 @@
 
   function destroyCurrentMap() {
     if (!state.map) return;
-    state.map.remove();
+    if (typeof state.map.destroy === "function") state.map.destroy();
     state.map = null;
   }
 
@@ -415,27 +422,6 @@
     });
   }
 
-  function createPopupHtml(place, index) {
-    const local = place[state.lang];
-    const markerLabel = typeof index === "number" ? '<p class="map-popup__step">' + (index + 1) + "</p>" : "";
-    return (
-      '<div class="map-popup" data-place-id="' + place.id + '">' +
-      markerLabel +
-      '<h3 class="map-popup__name">' + escapeHtml(local.name) + "</h3>" +
-      '<p class="map-popup__tagline">' + escapeHtml(local.tagline) + "</p>" +
-      "</div>"
-    );
-  }
-
-  function escapeHtml(value) {
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/\"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
   function placesForRoute(route) {
     const places = [];
     const seen = new Set();
@@ -449,27 +435,233 @@
     return places;
   }
 
-  function createRouteStopIcon(index) {
-    return window.L.divIcon({
-      className: "route-map-marker",
-      html: String(index + 1),
-      iconSize: [28, 28],
-      iconAnchor: [14, 14],
-      popupAnchor: [0, -12],
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function buildMapGeometry(places, extraCoords) {
+    const coords = places.map((place) => place.coords).concat(extraCoords || []);
+    let minLat = coords[0].lat;
+    let maxLat = coords[0].lat;
+    let minLng = coords[0].lng;
+    let maxLng = coords[0].lng;
+
+    coords.forEach((coord) => {
+      minLat = Math.min(minLat, coord.lat);
+      maxLat = Math.max(maxLat, coord.lat);
+      minLng = Math.min(minLng, coord.lng);
+      maxLng = Math.max(maxLng, coord.lng);
     });
+
+    const latSpan = Math.max(maxLat - minLat, 0.01);
+    const lngSpan = Math.max(maxLng - minLng, 0.01);
+    const drawWidth = MAP_VIEWBOX.width - MAP_VIEWBOX.padding * 2;
+    const drawHeight = MAP_VIEWBOX.height - MAP_VIEWBOX.padding * 2;
+    const scale = Math.min(drawWidth / lngSpan, drawHeight / latSpan);
+    const contentWidth = lngSpan * scale;
+    const contentHeight = latSpan * scale;
+
+    return {
+      minLat,
+      maxLat,
+      minLng,
+      maxLng,
+      scale,
+      offsetX: (MAP_VIEWBOX.width - contentWidth) / 2,
+      offsetY: (MAP_VIEWBOX.height - contentHeight) / 2,
+    };
+  }
+
+  function isCoordInsideGeometryBounds(coords, geometry) {
+    return (
+      coords.lat >= geometry.minLat &&
+      coords.lat <= geometry.maxLat &&
+      coords.lng >= geometry.minLng &&
+      coords.lng <= geometry.maxLng
+    );
+  }
+
+  function projectCoords(coords, geometry) {
+    return {
+      x: geometry.offsetX + (coords.lng - geometry.minLng) * geometry.scale,
+      y: geometry.offsetY + (geometry.maxLat - coords.lat) * geometry.scale,
+    };
+  }
+
+  function buildLandMasses(projectedPlaces) {
+    const masses = [];
+    const remaining = projectedPlaces.slice();
+    const clusterRadius = 120;
+
+    while (remaining.length) {
+      const seed = remaining.shift();
+      const cluster = [seed];
+      let changed = true;
+
+      while (changed) {
+        changed = false;
+        for (let i = remaining.length - 1; i >= 0; i -= 1) {
+          const candidate = remaining[i];
+          const isNearCluster = cluster.some((point) => {
+            const dx = point.point.x - candidate.point.x;
+            const dy = point.point.y - candidate.point.y;
+            return Math.sqrt(dx * dx + dy * dy) <= clusterRadius;
+          });
+          if (!isNearCluster) continue;
+          cluster.push(candidate);
+          remaining.splice(i, 1);
+          changed = true;
+        }
+      }
+
+      const xs = cluster.map((item) => item.point.x);
+      const ys = cluster.map((item) => item.point.y);
+      const minX = Math.min.apply(null, xs);
+      const maxX = Math.max.apply(null, xs);
+      const minY = Math.min.apply(null, ys);
+      const maxY = Math.max.apply(null, ys);
+      masses.push({
+        cx: (minX + maxX) / 2,
+        cy: (minY + maxY) / 2,
+        rx: Math.max(64, (maxX - minX) / 2 + 56),
+        ry: Math.max(42, (maxY - minY) / 2 + 44),
+      });
+    }
+
+    return masses;
+  }
+
+  function createSvgElement(name, attrs) {
+    const el = document.createElementNS("http://www.w3.org/2000/svg", name);
+    Object.keys(attrs || {}).forEach((key) => {
+      el.setAttribute(key, String(attrs[key]));
+    });
+    return el;
+  }
+
+  function renderMapBackground(svg, landMasses, routePoints) {
+    svg.appendChild(createSvgElement("rect", {
+      x: 0,
+      y: 0,
+      width: MAP_VIEWBOX.width,
+      height: MAP_VIEWBOX.height,
+      class: "map-water",
+      rx: 28,
+      ry: 28,
+    }));
+
+    for (let i = 1; i < 5; i += 1) {
+      const y = (MAP_VIEWBOX.height / 5) * i;
+      svg.appendChild(createSvgElement("path", {
+        d: "M 0 " + y + " C 180 " + (y - 24) + ", 320 " + (y + 18) + ", 520 " + y + " S 840 " + (y - 20) + ", 1000 " + y,
+        class: "map-current",
+      }));
+    }
+
+    landMasses.forEach((mass) => {
+      svg.appendChild(createSvgElement("ellipse", {
+        cx: mass.cx,
+        cy: mass.cy,
+        rx: mass.rx,
+        ry: mass.ry,
+        class: "map-land",
+      }));
+      svg.appendChild(createSvgElement("ellipse", {
+        cx: mass.cx,
+        cy: mass.cy,
+        rx: Math.max(24, mass.rx - 18),
+        ry: Math.max(18, mass.ry - 14),
+        class: "map-land map-land--inner",
+      }));
+    });
+
+    if (routePoints && routePoints.length > 1) {
+      svg.appendChild(createSvgElement("polyline", {
+        points: routePoints.map((point) => point.x + "," + point.y).join(" "),
+        class: "map-route-line",
+      }));
+    }
+  }
+
+  function createMapPanel(canvas) {
+    const panel = document.createElement("section");
+    panel.className = "map-panel";
+    panel.hidden = true;
+    canvas.appendChild(panel);
+    return panel;
+  }
+
+  function openMapPanel(panel, place, markerIndex) {
+    const local = place[state.lang];
+    panel.hidden = false;
+    panel.innerHTML = "";
+
+    if (typeof markerIndex === "number") {
+      const step = document.createElement("p");
+      step.className = "map-popup__step";
+      step.textContent = String(markerIndex + 1);
+      panel.appendChild(step);
+    }
+
+    const title = document.createElement("h3");
+    title.className = "map-popup__name";
+    title.textContent = local.name;
+    panel.appendChild(title);
+
+    const tagline = document.createElement("p");
+    tagline.className = "map-popup__tagline";
+    tagline.textContent = local.tagline;
+    panel.appendChild(tagline);
+
+    const link = document.createElement("a");
+    link.className = "map-popup__link";
+    link.href = "#/place/" + place.id;
+    link.textContent = t("openStop");
+    panel.appendChild(link);
+  }
+
+  function buildMarkerButton(place, point, markerIndex, panel, buttons) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "map-marker" + (typeof markerIndex === "number" ? " map-marker--route" : "");
+    button.style.left = clamp((point.x / MAP_VIEWBOX.width) * 100, 4, 96) + "%";
+    button.style.top = clamp((point.y / MAP_VIEWBOX.height) * 100, 6, 94) + "%";
+    button.setAttribute("aria-label", place[state.lang].name);
+
+    if (typeof markerIndex === "number") {
+      button.textContent = String(markerIndex + 1);
+    } else {
+      const dot = document.createElement("span");
+      dot.className = "map-marker__dot";
+      button.appendChild(dot);
+    }
+
+    button.addEventListener("click", () => {
+      buttons.forEach((otherButton) => otherButton.classList.remove("is-active"));
+      button.classList.add("is-active");
+      openMapPanel(panel, place, markerIndex);
+    });
+
+    return button;
+  }
+
+  function buildUserMarker(point) {
+    const marker = document.createElement("div");
+    marker.className = "map-user";
+    marker.style.left = clamp((point.x / MAP_VIEWBOX.width) * 100, 4, 96) + "%";
+    marker.style.top = clamp((point.y / MAP_VIEWBOX.height) * 100, 6, 94) + "%";
+    marker.setAttribute("aria-label", t("youAreHere"));
+    return marker;
   }
 
   function renderMap(routePlan) {
     const tpl = document.getElementById("tpl-map").content.cloneNode(true);
     appEl.replaceChildren(tpl);
 
+    const canvas = document.getElementById("map-canvas");
     const mapStatusEl = document.getElementById("map-status");
-    mapStatusEl.textContent = routePlan ? t("routeMapHint") : t("mapHint");
-
-    if (!window.L) {
-      mapStatusEl.textContent = "Map library failed to load.";
-      return;
-    }
+    const baseHint = routePlan ? t("routeMapHint") : t("mapHint");
+    mapStatusEl.textContent = baseHint;
 
     const mappedPlaces = routePlan ? placesForRoute(routePlan) : state.places.places;
     if (!mappedPlaces.length) {
@@ -477,98 +669,69 @@
       return;
     }
 
-    const map = window.L.map("map-canvas", {
-      zoomControl: true,
+    const geometry = buildMapGeometry(mappedPlaces);
+    const projectedPlaces = mappedPlaces.map((place, index) => ({
+      place,
+      index,
+      point: projectCoords(place.coords, geometry),
+    }));
+    const landMasses = buildLandMasses(projectedPlaces);
+
+    canvas.innerHTML = "";
+    const atlas = document.createElement("div");
+    atlas.className = "map-atlas";
+    canvas.appendChild(atlas);
+
+    const svg = createSvgElement("svg", {
+      viewBox: "0 0 " + MAP_VIEWBOX.width + " " + MAP_VIEWBOX.height,
+      class: "map-svg",
+      role: "img",
+      "aria-label": routePlan ? routePlan[state.lang].name : "Venice offline map",
     });
-    state.map = map;
+    renderMapBackground(svg, landMasses, routePlan ? projectedPlaces.map((item) => item.point) : null);
+    atlas.appendChild(svg);
 
-    window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(map);
-
-    const placeBounds = [];
-    mappedPlaces.forEach((place, index) => {
-      const local = place[state.lang];
-      const marker = routePlan
-        ? window.L.marker([place.coords.lat, place.coords.lng], { icon: createRouteStopIcon(index) }).addTo(map)
-        : window.L.circleMarker([place.coords.lat, place.coords.lng], {
-            radius: 7,
-            color: "#8a4a6b",
-            weight: 2,
-            fillColor: "#f7d6a3",
-            fillOpacity: 0.95,
-          }).addTo(map);
-
-      marker.bindPopup(createPopupHtml(place, routePlan ? index : undefined), {
-        closeButton: false,
-        offset: [0, -4],
-      });
-      marker.bindTooltip(local.name, {
-        direction: "top",
-        opacity: 0.9,
-      });
-      marker.on("popupopen", (event) => {
-        const popupEl = event.popup.getElement();
-        if (!popupEl) return;
-        popupEl.addEventListener("click", () => {
-          location.hash = "#/place/" + place.id;
-        }, { once: true });
-      });
-      placeBounds.push([place.coords.lat, place.coords.lng]);
+    const panel = createMapPanel(atlas);
+    const markerButtons = [];
+    projectedPlaces.forEach((entry) => {
+      const markerIndex = routePlan ? entry.index : undefined;
+      const button = buildMarkerButton(entry.place, entry.point, markerIndex, panel, markerButtons);
+      markerButtons.push(button);
+      atlas.appendChild(button);
     });
 
-    if (routePlan && placeBounds.length > 1) {
-      window.L.polyline(placeBounds, {
-        color: "#8a4a6b",
-        weight: 4,
-        opacity: 0.75,
-        dashArray: "8 8",
-      }).addTo(map);
+    if (projectedPlaces.length) {
+      markerButtons[0].classList.add("is-active");
+      openMapPanel(panel, projectedPlaces[0].place, routePlan ? projectedPlaces[0].index : undefined);
     }
 
-    map.fitBounds(placeBounds, {
-      padding: [24, 24],
-      maxZoom: 14,
-    });
+    state.map = {
+      destroy() {
+        canvas.innerHTML = "";
+      },
+    };
 
-    if (routePlan) return;
+    if (routePlan) {
+      mapStatusEl.textContent = baseHint + " " + t("mapOffline");
+      return;
+    }
 
     getUserLocation()
       .then((coords) => {
-        if (state.map !== map) return;
-        state.userLocation = coords;
         if (distanceMeters(coords, VENICE_CENTER) > MAX_MAP_LOCATION_DISTANCE_METERS) {
-          mapStatusEl.textContent = t("mapLocationFar");
-          map.fitBounds(placeBounds, {
-            padding: [24, 24],
-            maxZoom: 14,
-          });
+          mapStatusEl.textContent = t("mapLocationFar") + " " + t("mapOffline");
           return;
         }
-
-        window.L.circleMarker([coords.lat, coords.lng], {
-          radius: 8,
-          color: "#155eef",
-          weight: 2,
-          fillColor: "#7dd3fc",
-          fillOpacity: 1,
-        })
-          .bindPopup("You are here")
-          .addTo(map);
-
-        const boundsWithUser = placeBounds.concat([[coords.lat, coords.lng]]);
-        map.fitBounds(boundsWithUser, {
-          padding: [24, 24],
-          maxZoom: 14,
-        });
+        state.userLocation = coords;
+        if (!isCoordInsideGeometryBounds(coords, geometry)) {
+          mapStatusEl.textContent = t("mapLocationOutside") + " " + t("mapOffline");
+          return;
+        }
+        atlas.appendChild(buildUserMarker(projectCoords(coords, geometry)));
+        mapStatusEl.textContent = baseHint + " " + t("mapOffline");
       })
       .catch(() => {
-        if (state.map !== map) return;
-        map.fitBounds(placeBounds, {
-          padding: [24, 24],
-          maxZoom: 14,
-        });
+        mapStatusEl.textContent = baseHint + " " + t("mapOffline");
       });
   }
 

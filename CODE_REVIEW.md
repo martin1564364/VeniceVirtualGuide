@@ -1,108 +1,79 @@
 # Code Review: Venice Virtual Guide
 
-Review date: 2026-07-07
+Review date: 2026-07-08
 
-Scope: static runtime in `site/`, content manifest, service worker behavior, build-time scripts in `tools/`, and repository documentation. No app code was changed.
+Scope: current static runtime in `site/`, generated content manifests, service worker offline behavior, and final-stage documentation. App code was not changed during this review.
 
 ## Summary
 
-The current app is syntactically valid and the deployed `site/places.json` references files that exist. The biggest risks are lifecycle bugs: audio can continue playing after the UI changes, and content-only updates do not reliably refresh the offline cache. These are important for the stated goal of a fully offline family travel guide.
-
-## Implementation Status
-
-- Fixed: old audio can keep playing after navigation or language changes.
-- Fixed: content-only updates do not trigger a new offline precache.
-- Fixed: cache cleanup can delete the newly installed cache during service-worker activation.
-- Fixed: download progress/completion is not a durable offline-readiness indicator.
-- Partially fixed: documentation now matches deployed assets; image source/license/author still need to be supplied in `CREDITS.md`.
-- Fixed: `generate-audio.mjs` can leave missing or stale metadata when text is unchanged.
-- Fixed: Media Session artwork metadata uses the wrong MIME type for WebP images.
-- Fixed: build validation does not catch duplicate IDs, invalid IDs, or duplicate ordering.
+The app is in a usable final-stage shape: JavaScript syntax checks pass, all referenced place media exists, and all route `placeId` references resolve. The main fixes worth doing are reliability and polish fixes around first-run offline caching, the new offline map, Media Session cleanup, and stale documentation.
 
 ## Findings
 
-### High: Old audio can keep playing after navigation or language changes
+### High: First-run precache downloads every asset concurrently
 
-References: `site/js/app.js:61`, `site/js/app.js:73`, `site/js/app.js:96`, `site/js/app.js:115`, `site/js/player.js:113`
+References: `site/sw.js:64`, `site/sw.js:66`, `site/sw.js:76`, `site/sw.js:84`, `site/sw.js:99`
 
-`renderDetail()` creates a fresh `AudioPlayer` every time a detail view is rendered, but the previous `state.player` is not stopped before the DOM is replaced. This can happen when:
+`precacheAll()` starts a fetch for every shell file, image, thumbnail, JSON file, and audio file at once via `Promise.all(assets.map(...))`. With 30 places and two audio tracks per place, this can create a large burst of simultaneous MP3 downloads on first install. On mobile Chrome or weaker Wi-Fi, this increases the chance of throttling, transient failures, or an aborted install.
 
-- the user starts audio, then taps Back to the list;
-- the user switches PL/EN while audio is playing;
-- the user navigates from one place detail to another once more places are added.
+Because `installCacheFromContent()` deletes the whole new cache when any asset fails, a few overloaded requests can leave the app without a complete offline bundle even though the files themselves are valid.
 
-Because each `AudioPlayer` owns a detached `new Audio()` instance, removing the player DOM does not stop playback. This violates the design goal that only one track plays at a time and can leave invisible audio running with stale Media Session handlers.
+Needed fix: download the precache manifest with a small concurrency limit, for example 4-6 assets at a time, while keeping the existing progress messages and failure reporting.
 
-Needed improvement: stop and clear the existing player before every render that replaces the app view, or reuse a single shared player instance.
+### Medium: Offline map user marker can be placed inaccurately near Venice
 
-### High: Content-only updates do not trigger a new offline precache
+References: `site/js/app.js:438`, `site/js/app.js:652`, `site/js/app.js:658`, `site/js/app.js:707`, `site/js/app.js:712`
 
-References: `site/sw.js:3`, `site/sw.js:60`, `site/sw.js:63`, `site/sw.js:65`, `site/sw.js:105`, `site/sw.js:108`
+`buildMapGeometry()` supports `extraCoords`, but `renderMap()` builds the map projection from guide places only. The current user location is projected afterward using that existing place-only geometry.
 
-The service worker only builds the full offline cache during its `install` event. A new `install` only happens when the browser sees `sw.js` change. However, the content pipeline updates `site/places.json` and asset files without necessarily changing `site/sw.js`.
+For someone within `MAX_MAP_LOCATION_DISTANCE_METERS` of Venice but outside the place bounding box, such as near the Cavallino-Treporti base, the marker can be clamped onto the edge of the atlas and look like a real map position even though the atlas was not scaled to include that point.
 
-The fetch handler does fetch the latest `places.json` from the network, but it does not derive and precache the new asset list after a manifest version change. Result: after adding a place, users may see updated JSON while online, but the new images/audio are not guaranteed to be cached for offline use. This conflicts with the design expectation that bumping `places.json.version` refreshes the offline bundle.
+Needed fix: either include the accepted user coordinates when computing map geometry, or only show the user marker when the location falls inside the rendered place bounds. The second option is simpler if the offline map is meant to represent Venice only.
 
-Needed improvement: either update `sw.js` on every content release, or implement a runtime update flow where the active service worker detects a new `places.json.version`, creates a new versioned cache, downloads the derived asset list, and only then promotes it.
+### Medium: Media Session handlers and metadata survive after leaving a detail view
 
-### High: Cache cleanup can delete the newly installed cache during service-worker activation
+References: `site/js/app.js:138`, `site/js/app.js:212`, `site/js/player.js:123`, `site/js/player.js:124`, `site/js/player.js:128`
 
-References: `site/sw.js:74`, `site/sw.js:78`, `site/sw.js:81`, `site/sw.js:89`, `site/sw.js:91`
+The app now stops the audio player on every route render, but `AudioPlayer.stop()` does not clear Media Session metadata or action handlers. After navigating back to the list, Android lock-screen controls can still show the previous place, and the stale `play` handler can call `this.audio.play()` on an audio element whose source was removed.
 
-`activate` calls `currentCacheName()`, which uses `caches.match("places.json")` to infer the active version. When both an old and newly installed cache contain `places.json`, `caches.match()` can return the old cached response depending on cache search order. If that happens, the activation cleanup keeps the old cache and deletes the newly installed cache.
+Needed fix: in `stop()`, clear `navigator.mediaSession.metadata`, set playback state to `none` or `paused`, and remove `play` / `pause` handlers with `setActionHandler(action, null)` inside a browser-support-safe `try` block. Also catch the `audio.play()` promise in the Media Session play handler.
 
-Needed improvement: persist the just-installed cache name explicitly, or compute the active cache name from the service worker's own install-time manifest data rather than from a global `caches.match()` lookup.
+### Medium: Map markers are below recommended mobile touch size
 
-### Medium: Download progress/completion is not a durable offline-readiness indicator
+References: `site/css/app.css:447`, `site/css/app.css:448`, `site/css/app.css:449`, `site/css/app.css:476`, `site/css/app.css:477`
 
-References: `site/js/app.js:158`, `site/js/app.js:161`, `site/js/app.js:168`, `site/js/app.js:178`, `site/sw.js:34`, `site/sw.js:45`, `site/sw.js:46`
+General map markers are 28 x 28 px and route markers are 34 x 34 px. This is smaller than the 44-48 px touch target normally expected on mobile, and the map is intended for walking use on Android.
 
-The first-run screen is driven only by transient service-worker messages. On a revisit after a completed cache, the app does not inspect Cache Storage to set the offline status, so the header can remain at the initial ellipsis. Also, `precacheAll()` increments progress for failed fetches and still broadcasts `precache-complete`, even when some assets were skipped.
+Needed fix: keep the visible marker design if desired, but give `.map-marker` a 44-48 px hit area using width/height or a pseudo-element. Preserve the visual center so marker positions do not shift.
 
-This means users can be told the guide is ready even if one or more files failed to cache. The current manifest references all files correctly, but the failure mode matters during flaky Wi-Fi, which is one of the app's core use cases.
+### Low: Final-stage documentation is stale
 
-Needed improvement: track failed asset URLs during precache and surface partial/offline-incomplete state. On startup, have the page ask the service worker or Cache Storage for current readiness instead of relying only on install-time messages.
+References: `README.md:5`, `README.md:28`, `README.md:33`, `docs/DESIGN.md:19`, `docs/DESIGN.md:79`, `docs/DESIGN.md:128`
 
-### Medium: Documentation and credits are stale relative to deployed assets
+The runtime now has 30 places, routes, generated audio, and an offline SVG atlas map. `README.md` still describes the app as a Phase 1 one-place guide, while `docs/DESIGN.md` still describes a 20-place plan and OpenAI TTS even though `tools/generate-audio.mjs` uses ElevenLabs.
 
-References: `README.md:5`, `README.md:33`, `CREDITS.md:5`, `site/places.json`
-
-`README.md` says St Mark's Square has a placeholder image and no audio, but `site/places.json` points to WebP images and both `audio/pl/st-marks-square.mp3` and `audio/en/st-marks-square.mp3`, and those files exist. `CREDITS.md` credits the SVG placeholder, while the deployed content uses `site/images/st-marks-square.webp` and `site/images/thumbs/st-marks-square.webp`.
-
-Needed improvement: update README status and record the actual image source/license/author for the deployed WebP source photo before launch.
-
-### Medium: `generate-audio.mjs` can leave missing or stale metadata when text is unchanged
-
-References: `tools/generate-audio.mjs:52`, `tools/generate-audio.mjs:54`, `tools/generate-audio.mjs:69`, `tools/generate-audio.mjs:70`, `tools/generate-audio.mjs:71`
-
-When the stored text hash matches, the script skips the language entirely. It does not verify that the MP3 still exists, nor does it refill `local.audio` / `local.audioDuration` if those fields are missing or stale. If `content/places.source.json` is edited manually or generated audio is deleted, the script can report "skip (unchanged)" while leaving the manifest incomplete.
-
-Needed improvement: on hash match, still verify the expected MP3 exists and metadata fields are present. If not, either regenerate or parse the existing file and rewrite the missing fields.
-
-### Low: Media Session artwork metadata uses the wrong MIME type for WebP images
-
-References: `site/js/player.js:103`, `site/js/player.js:106`, `site/places.json`
-
-`track.artwork` is `images/st-marks-square.webp`, but Media Session metadata declares it as `type: "image/svg+xml"` and `sizes: "512x512"`. Lock-screen artwork may fail or behave inconsistently.
-
-Needed improvement: set Media Session artwork metadata to match the actual asset type and dimensions, or provide a dedicated PNG/WebP icon/artwork asset with accurate metadata.
-
-### Low: Build validation does not catch duplicate IDs, invalid IDs, or duplicate ordering
-
-References: `tools/build-manifest.mjs:25`, `tools/build-manifest.mjs:45`, `tools/build-manifest.mjs:50`
-
-The manifest validator checks required fields and file existence, but it does not check that place IDs are unique, ID strings are URL-safe kebab-case, order values are unique numbers, coordinates are numeric, or each language payload is structurally valid beyond field presence. With 20 planned places, these mistakes would create broken routing or unstable list ordering.
-
-Needed improvement: extend validation to cover uniqueness, ID format, coordinate ranges, numeric positive `audioDuration`, and supported language completeness.
+Needed fix: update the README status and development notes to match the final app. Either update `docs/DESIGN.md` to an as-built document or clearly mark it as historical design notes.
 
 ## Verification Performed
 
 - `node --check site/js/app.js`
 - `node --check site/js/player.js`
 - `node --check site/sw.js`
-- Parsed `site/manifest.webmanifest`, `content/places.source.json`, and `site/places.json` as JSON.
-- Checked that all current manifest asset references exist under `site/`.
-- Compared `content/places.source.json` and `site/places.json`; they match except for the expected version value.
-- Confirmed local Node version is `v22.21.0` and supports `fs.globSync`, which `tools/optimize-images.mjs` uses.
+- Parsed `site/places.json` and `site/routes.json`.
+- Verified all place images, thumbnails, and PL/EN audio paths referenced by `site/places.json` exist under `site/`.
+- Verified all route `placeId` references resolve to known places.
 
-I did not run `npm run build-manifest` because it writes `site/places.json` and bumps the version; that would be a behavior-affecting repo change outside this review request.
+Validation result:
+
+```json
+{
+  "places": 30,
+  "routes": 6,
+  "missing": [],
+  "badRefs": []
+}
+```
+
+## Residual Risk
+
+No browser-based offline install test was run during this review. Before final deployment, manually test in Chrome with a fresh profile: first load, wait for offline-ready state, switch to airplane mode, reload, open list, routes, map, detail pages, and play audio in both languages.
