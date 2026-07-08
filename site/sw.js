@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_SHELL_VERSION = "2026-07-08-6";
+const APP_SHELL_VERSION = "2026-07-08-7";
 const CACHE_PREFIX = "venice-guide-v";
 const META_CACHE = CACHE_PREFIX + "meta";
 const ACTIVE_CACHE_KEY = "active-cache";

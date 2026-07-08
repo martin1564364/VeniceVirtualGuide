@@ -7,6 +7,9 @@
   const VENICE_CENTER = { lat: 45.4341, lng: 12.3388 };
   const MAX_MAP_LOCATION_DISTANCE_METERS = 20000;
   const MAP_VIEWBOX = { width: 1000, height: 720, padding: 72 };
+  const LEAFLET_CSS_URL = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+  const LEAFLET_JS_URL = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+  let leafletLoadPromise = null;
 
   const I18N = {
     back: { pl: "Wstecz", en: "Back" },
@@ -45,7 +48,16 @@
     pl: "Twoja lokalizacja jest poza zakresem tej mapy offline, dlatego pokazujemy tylko miejsca z przewodnika.",
     en: "Your location is outside this offline map area, so only guide places are shown.",
   };
+  I18N.mapOnline = { pl: "Mapa online.", en: "Online map." };
   I18N.mapOffline = { pl: "Mapa dziala w pelni offline.", en: "This map works fully offline." };
+  I18N.mapOnlineUnavailable = {
+    pl: "Mapa online jest niedostepna, pokazujemy wersje offline.",
+    en: "Online map is unavailable, showing the offline version.",
+  };
+  I18N.routeMapOffline = {
+    pl: "Mapa trasy wymaga internetu. Offline pokazujemy punkty trasy.",
+    en: "Route map needs internet. Offline, route stops are shown.",
+  };
   I18N.youAreHere = { pl: "Jestes tutaj", en: "You are here" };
 
   const state = {
@@ -148,6 +160,7 @@
   function destroyCurrentMap() {
     if (!state.map) return;
     if (typeof state.map.destroy === "function") state.map.destroy();
+    else if (typeof state.map.remove === "function") state.map.remove();
     state.map = null;
   }
 
@@ -435,6 +448,80 @@
     return places;
   }
 
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector('script[src="' + src + '"]');
+      if (existing) {
+        existing.addEventListener("load", resolve, { once: true });
+        existing.addEventListener("error", reject, { once: true });
+        if (window.L) resolve();
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
+  function loadLeaflet() {
+    if (window.L) return Promise.resolve(window.L);
+    if (!navigator.onLine) return Promise.reject(new Error("Offline."));
+    if (!leafletLoadPromise) {
+      if (!document.querySelector('link[href="' + LEAFLET_CSS_URL + '"]')) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = LEAFLET_CSS_URL;
+        document.head.appendChild(link);
+      }
+      leafletLoadPromise = loadScript(LEAFLET_JS_URL).then(() => {
+        if (!window.L) throw new Error("Leaflet failed to load.");
+        return window.L;
+      }).catch((err) => {
+        leafletLoadPromise = null;
+        throw err;
+      });
+    }
+    return leafletLoadPromise;
+  }
+
+  function createRouteStopIcon(index) {
+    return window.L.divIcon({
+      className: "route-map-marker",
+      html: String(index + 1),
+      iconSize: [34, 34],
+      iconAnchor: [17, 17],
+      popupAnchor: [0, -14],
+    });
+  }
+
+  function createOnlinePopupHtml(place, index) {
+    const local = place[state.lang];
+    const step = typeof index === "number"
+      ? '<p class="map-popup__step">' + (index + 1) + "</p>"
+      : "";
+    return (
+      '<div class="map-popup" data-place-id="' + escapeHtml(place.id) + '">' +
+      step +
+      '<h3 class="map-popup__name">' + escapeHtml(local.name) + "</h3>" +
+      '<p class="map-popup__tagline">' + escapeHtml(local.tagline) + "</p>" +
+      '<a class="map-popup__link" href="#/place/' + escapeHtml(place.id) + '">' + escapeHtml(t("openStop")) + "</a>" +
+      "</div>"
+    );
+  }
+
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
@@ -654,20 +741,140 @@
     return marker;
   }
 
-  function renderMap(routePlan) {
-    const tpl = document.getElementById("tpl-map").content.cloneNode(true);
-    appEl.replaceChildren(tpl);
-
-    const canvas = document.getElementById("map-canvas");
-    const mapStatusEl = document.getElementById("map-status");
-    const baseHint = routePlan ? t("routeMapHint") : t("mapHint");
-    mapStatusEl.textContent = baseHint;
-
+  function getMappedPlaces(routePlan, mapStatusEl) {
     const mappedPlaces = routePlan ? placesForRoute(routePlan) : state.places.places;
     if (!mappedPlaces.length) {
       mapStatusEl.textContent = "No mappable stops for this route.";
+      return null;
+    }
+    return mappedPlaces;
+  }
+
+  function renderOnlineMap(canvas, mapStatusEl, routePlan, mappedPlaces, baseHint) {
+    const map = window.L.map(canvas, {
+      zoomControl: true,
+      scrollWheelZoom: false,
+    });
+    state.map = map;
+
+    window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    const bounds = [];
+    mappedPlaces.forEach((place, index) => {
+      const coords = [place.coords.lat, place.coords.lng];
+      const marker = routePlan
+        ? window.L.marker(coords, { icon: createRouteStopIcon(index) }).addTo(map)
+        : window.L.circleMarker(coords, {
+            radius: 8,
+            color: "#8a4a6b",
+            weight: 2,
+            fillColor: "#f7d6a3",
+            fillOpacity: 0.95,
+          }).addTo(map);
+
+      marker.bindPopup(createOnlinePopupHtml(place, routePlan ? index : undefined), {
+        closeButton: true,
+        offset: [0, -4],
+      });
+      marker.bindTooltip(place[state.lang].name, {
+        direction: "top",
+        opacity: 0.9,
+      });
+      bounds.push(coords);
+    });
+
+    if (routePlan && bounds.length > 1) {
+      window.L.polyline(bounds, {
+        color: "#8a4a6b",
+        weight: 4,
+        opacity: 0.8,
+        dashArray: "8 8",
+      }).addTo(map);
+    }
+
+    map.fitBounds(bounds, {
+      padding: [28, 28],
+      maxZoom: routePlan ? 17 : 14,
+    });
+
+    mapStatusEl.textContent = baseHint + " " + t("mapOnline");
+
+    if (routePlan) return;
+
+    getUserLocation()
+      .then((coords) => {
+        if (state.map !== map) return;
+        if (distanceMeters(coords, VENICE_CENTER) > MAX_MAP_LOCATION_DISTANCE_METERS) return;
+        state.userLocation = coords;
+        const marker = window.L.circleMarker([coords.lat, coords.lng], {
+          radius: 8,
+          color: "#155eef",
+          weight: 2,
+          fillColor: "#7dd3fc",
+          fillOpacity: 1,
+        }).addTo(map);
+        marker.bindPopup(escapeHtml(t("youAreHere")));
+      })
+      .catch(() => {});
+  }
+
+  function renderOfflineRouteStops(canvas, mapStatusEl, mappedPlaces) {
+    canvas.innerHTML = "";
+    const list = document.createElement("ol");
+    list.className = "map-offline-route";
+
+    mappedPlaces.forEach((place, index) => {
+      const item = document.createElement("li");
+      item.className = "map-offline-route__item";
+
+      const badge = document.createElement("span");
+      badge.className = "map-offline-route__badge";
+      badge.textContent = String(index + 1);
+      item.appendChild(badge);
+
+      const body = document.createElement("div");
+      body.className = "map-offline-route__body";
+
+      const name = document.createElement("strong");
+      name.className = "map-offline-route__name";
+      name.textContent = place[state.lang].name;
+      body.appendChild(name);
+
+      const tagline = document.createElement("span");
+      tagline.className = "map-offline-route__tagline";
+      tagline.textContent = place[state.lang].tagline;
+      body.appendChild(tagline);
+
+      item.appendChild(body);
+
+      const link = document.createElement("a");
+      link.className = "map-offline-route__link";
+      link.href = "#/place/" + place.id;
+      link.textContent = t("openStop");
+      item.appendChild(link);
+
+      list.appendChild(item);
+    });
+
+    canvas.appendChild(list);
+    state.map = {
+      destroy() {
+        canvas.innerHTML = "";
+      },
+    };
+    mapStatusEl.textContent = t("routeMapOffline");
+  }
+
+  function renderOfflineMap(canvas, mapStatusEl, routePlan, mappedPlaces, baseHint, statusPrefix) {
+    if (routePlan) {
+      renderOfflineRouteStops(canvas, mapStatusEl, mappedPlaces);
       return;
     }
+
+    mapStatusEl.textContent = statusPrefix || baseHint;
 
     const geometry = buildMapGeometry(mappedPlaces);
     const projectedPlaces = mappedPlaces.map((place, index) => ({
@@ -712,7 +919,7 @@
     };
 
     if (routePlan) {
-      mapStatusEl.textContent = baseHint + " " + t("mapOffline");
+      mapStatusEl.textContent = (statusPrefix || baseHint) + " " + t("mapOffline");
       return;
     }
 
@@ -731,7 +938,36 @@
         mapStatusEl.textContent = baseHint + " " + t("mapOffline");
       })
       .catch(() => {
-        mapStatusEl.textContent = baseHint + " " + t("mapOffline");
+        mapStatusEl.textContent = (statusPrefix || baseHint) + " " + t("mapOffline");
+      });
+  }
+
+  function renderMap(routePlan) {
+    const tpl = document.getElementById("tpl-map").content.cloneNode(true);
+    appEl.replaceChildren(tpl);
+
+    const canvas = document.getElementById("map-canvas");
+    const mapStatusEl = document.getElementById("map-status");
+    const baseHint = routePlan ? t("routeMapHint") : t("mapHint");
+    mapStatusEl.textContent = baseHint;
+
+    const mappedPlaces = getMappedPlaces(routePlan, mapStatusEl);
+    if (!mappedPlaces) return;
+
+    if (!navigator.onLine) {
+      renderOfflineMap(canvas, mapStatusEl, routePlan, mappedPlaces, baseHint);
+      return;
+    }
+
+    loadLeaflet()
+      .then(() => {
+        if (!document.body.contains(canvas)) return;
+        renderOnlineMap(canvas, mapStatusEl, routePlan, mappedPlaces, baseHint);
+      })
+      .catch((err) => {
+        console.warn("Online map unavailable", err);
+        if (!document.body.contains(canvas)) return;
+        renderOfflineMap(canvas, mapStatusEl, routePlan, mappedPlaces, baseHint, t("mapOnlineUnavailable"));
       });
   }
 
