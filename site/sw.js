@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_SHELL_VERSION = "2026-07-08-3";
+const APP_SHELL_VERSION = "2026-07-08-4";
 const CACHE_PREFIX = "venice-guide-v";
 const META_CACHE = CACHE_PREFIX + "meta";
 const ACTIVE_CACHE_KEY = "active-cache";
@@ -61,7 +61,7 @@ async function precacheAll(cacheName, assets) {
   const cache = await caches.open(cacheName);
   let done = 0;
   const failed = [];
-  await broadcast({ type: "precache-progress", done, total: assets.length });
+  await broadcast({ type: "precache-progress", cacheName, done, total: assets.length });
 
   await Promise.all(
     assets.map(async (url) => {
@@ -73,15 +73,15 @@ async function precacheAll(cacheName, assets) {
         failed.push(url);
       } finally {
         done += 1;
-        await broadcast({ type: "precache-progress", done, total: assets.length });
+        await broadcast({ type: "precache-progress", cacheName, done, total: assets.length });
       }
     })
   );
 
   if (failed.length > 0) {
-    await broadcast({ type: "precache-incomplete", failed, total: assets.length });
+    await broadcast({ type: "precache-incomplete", cacheName, failed, total: assets.length });
   } else {
-    await broadcast({ type: "precache-complete", total: assets.length });
+    await broadcast({ type: "precache-complete", cacheName, total: assets.length });
   }
   return failed;
 }

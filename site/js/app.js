@@ -12,6 +12,7 @@
     openMaps: { pl: "Otwórz w Mapach Google", en: "Open in Google Maps" },
     offlineReady: { pl: "✓ Gotowe offline", en: "✓ Ready for offline use" },
     offlineUnavailable: { pl: "Offline niedostępne", en: "Offline unavailable" },
+    offlinePreparing: { pl: "Przygotowanie offline", en: "Preparing offline" },
     downloading: { pl: "Pobieranie…", en: "Downloading…" },
   };
 
@@ -593,6 +594,7 @@
   const downloadFill = document.getElementById("download-progress-fill");
   const downloadCount = document.getElementById("download-count");
   const downloadSkip = document.getElementById("download-skip");
+  let activePrecacheCacheName = null;
 
   function hideDownloadScreen() {
     downloadScreen.hidden = true;
@@ -622,22 +624,34 @@
       const msg = event.data || {};
       if (msg.type === "precache-progress") {
         if (!msg.total) return;
+        if (!activePrecacheCacheName) activePrecacheCacheName = msg.cacheName || null;
+        if (activePrecacheCacheName && msg.cacheName && msg.cacheName !== activePrecacheCacheName) return;
         showDownloadScreen();
         const pct = msg.total ? Math.round((msg.done / msg.total) * 100) : 0;
         downloadFill.style.width = pct + "%";
         downloadCount.textContent = msg.done + " / " + msg.total + " files";
         downloadStatus.textContent = t("downloading");
+        offlineStatusEl.textContent = t("offlinePreparing");
       } else if (msg.type === "precache-complete") {
+        if (activePrecacheCacheName && msg.cacheName && msg.cacheName !== activePrecacheCacheName) return;
+        activePrecacheCacheName = null;
         downloadStatus.textContent = t("offlineReady");
         offlineStatusEl.textContent = t("offlineReady");
         setTimeout(() => {
           hideDownloadScreen();
         }, 800);
       } else if (msg.type === "precache-incomplete") {
+        if (activePrecacheCacheName && msg.cacheName && msg.cacheName !== activePrecacheCacheName) return;
+        activePrecacheCacheName = null;
         downloadStatus.textContent = t("offlineIncomplete");
         offlineStatusEl.textContent = t("offlineIncomplete");
       } else if (msg.type === "cache-status") {
-        offlineStatusEl.textContent = msg.ready ? t("offlineReady") : t("offlineUnavailable");
+        if (msg.ready) {
+          activePrecacheCacheName = null;
+          offlineStatusEl.textContent = t("offlineReady");
+        } else {
+          offlineStatusEl.textContent = t("offlinePreparing");
+        }
       }
     });
 
@@ -649,6 +663,7 @@
     });
 
     window.addEventListener("load", () => {
+      offlineStatusEl.textContent = t("offlinePreparing");
       navigator.serviceWorker
         .register("sw.js")
         .then((registration) => {
